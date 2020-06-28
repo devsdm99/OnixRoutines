@@ -133,6 +133,26 @@ namespace MainRoutinesProject.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ejercicio {
+            get {
+                object obj = ResourceManager.GetObject("ejercicio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap finish {
+            get {
+                object obj = ResourceManager.GetObject("finish", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap help {
             get {
                 object obj = ResourceManager.GetObject("help", resourceCulture);
@@ -143,9 +163,19 @@ namespace MainRoutinesProject.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap mas {
+        internal static System.Drawing.Bitmap mas_128px {
             get {
-                object obj = ResourceManager.GetObject("mas", resourceCulture);
+                object obj = ResourceManager.GetObject("mas_128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap mas_64px {
+            get {
+                object obj = ResourceManager.GetObject("mas_64px", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -156,16 +186,6 @@ namespace MainRoutinesProject.Properties {
         internal static System.Drawing.Bitmap OnixLogo {
             get {
                 object obj = ResourceManager.GetObject("OnixLogo", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap sport_1_ {
-            get {
-                object obj = ResourceManager.GetObject("sport_1_", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

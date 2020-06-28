@@ -37,9 +37,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.RutinaNumTB = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.newRutina = new OnixLibrary.CustomControls.FlatOnix();
             this.panel2 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.button2 = new System.Windows.Forms.Button();
+            this.finalizarButton = new System.Windows.Forms.Button();
+            this.añadirButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -50,19 +52,19 @@
             this.NombreLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NombreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NombreLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.NombreLabel.Location = new System.Drawing.Point(61, 45);
+            this.NombreLabel.Location = new System.Drawing.Point(29, 45);
             this.NombreLabel.Name = "NombreLabel";
-            this.NombreLabel.Size = new System.Drawing.Size(100, 25);
+            this.NombreLabel.Size = new System.Drawing.Size(167, 25);
             this.NombreLabel.TabIndex = 2;
-            this.NombreLabel.Text = "Nombre:";
+            this.NombreLabel.Text = "Nombre rutina:";
             // 
             // NombreTB
             // 
             this.NombreTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.NombreTB.Location = new System.Drawing.Point(166, 47);
+            this.NombreTB.Location = new System.Drawing.Point(202, 47);
             this.NombreTB.Multiline = true;
             this.NombreTB.Name = "NombreTB";
-            this.NombreTB.Size = new System.Drawing.Size(188, 23);
+            this.NombreTB.Size = new System.Drawing.Size(152, 23);
             this.NombreTB.TabIndex = 3;
             // 
             // label1
@@ -144,21 +146,11 @@
             this.panel1.Size = new System.Drawing.Size(1326, 94);
             this.panel1.TabIndex = 10;
             // 
-            // newRutina
-            // 
-            this.newRutina.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.newRutina.BackColor = System.Drawing.Color.Coral;
-            this.newRutina.Imagen = global::MainRoutinesProject.Properties.Resources.mas;
-            this.newRutina.Location = new System.Drawing.Point(1005, 28);
-            this.newRutina.Name = "newRutina";
-            this.newRutina.Size = new System.Drawing.Size(241, 163);
-            this.newRutina.TabIndex = 0;
-            this.newRutina.Texto = "Añadir";
-            this.newRutina.Click += new System.EventHandler(this.flatOnix1_Click);
-            // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.newRutina);
+            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.finalizarButton);
+            this.panel2.Controls.Add(this.añadirButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 598);
             this.panel2.Name = "panel2";
@@ -169,11 +161,74 @@
             // 
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Silver;
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 94);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1326, 504);
             this.flowLayoutPanel1.TabIndex = 12;
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.button2.FlatAppearance.BorderSize = 2;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("MV Boli", 21.75F, System.Drawing.FontStyle.Bold);
+            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.button2.Image = global::MainRoutinesProject.Properties.Resources.mas_128px;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.button2.Location = new System.Drawing.Point(34, 19);
+            this.button2.Name = "button2";
+            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.button2.Size = new System.Drawing.Size(258, 185);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "VER DETALLE";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // finalizarButton
+            // 
+            this.finalizarButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.finalizarButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.finalizarButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.finalizarButton.FlatAppearance.BorderSize = 2;
+            this.finalizarButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.finalizarButton.Font = new System.Drawing.Font("MV Boli", 21.75F, System.Drawing.FontStyle.Bold);
+            this.finalizarButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.finalizarButton.Image = global::MainRoutinesProject.Properties.Resources.finish;
+            this.finalizarButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.finalizarButton.Location = new System.Drawing.Point(691, 19);
+            this.finalizarButton.Name = "finalizarButton";
+            this.finalizarButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.finalizarButton.Size = new System.Drawing.Size(258, 185);
+            this.finalizarButton.TabIndex = 6;
+            this.finalizarButton.Text = "FINALIZAR";
+            this.finalizarButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.finalizarButton.UseVisualStyleBackColor = true;
+            this.finalizarButton.Click += new System.EventHandler(this.finalizarButton_Click);
+            // 
+            // añadirButton
+            // 
+            this.añadirButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.añadirButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.añadirButton.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.añadirButton.FlatAppearance.BorderSize = 2;
+            this.añadirButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.añadirButton.Font = new System.Drawing.Font("MV Boli", 21.75F, System.Drawing.FontStyle.Bold);
+            this.añadirButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.añadirButton.Image = global::MainRoutinesProject.Properties.Resources.mas_128px;
+            this.añadirButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.añadirButton.Location = new System.Drawing.Point(1008, 19);
+            this.añadirButton.Name = "añadirButton";
+            this.añadirButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.añadirButton.Size = new System.Drawing.Size(258, 185);
+            this.añadirButton.TabIndex = 5;
+            this.añadirButton.Text = "RUTINAS";
+            this.añadirButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.añadirButton.UseVisualStyleBackColor = true;
+            this.añadirButton.Click += new System.EventHandler(this.newRutina_Click);
             // 
             // NuevaRutinaScreen
             // 
@@ -197,8 +252,6 @@
         }
 
         #endregion
-
-        private OnixLibrary.CustomControls.FlatOnix newRutina;
         private System.Windows.Forms.Label NombreLabel;
         private System.Windows.Forms.TextBox NombreTB;
         private System.Windows.Forms.Label label1;
@@ -210,5 +263,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button añadirButton;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button finalizarButton;
     }
 }

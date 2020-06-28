@@ -35,11 +35,11 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.logoOnix = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rutinasButton = new System.Windows.Forms.Button();
+            this.clientesButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.flatOnix3 = new OnixLibrary.CustomControls.FlatOnix();
-            this.rutinasButton = new OnixLibrary.CustomControls.FlatOnix();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.logoOnix)).BeginInit();
             this.panel2.SuspendLayout();
@@ -122,15 +122,53 @@
             // 
             this.panel2.AutoScroll = true;
             this.panel2.BackColor = System.Drawing.Color.Coral;
-            this.panel2.Controls.Add(this.button2);
+            this.panel2.Controls.Add(this.rutinasButton);
+            this.panel2.Controls.Add(this.clientesButton);
             this.panel2.Controls.Add(this.button1);
             this.panel2.Controls.Add(this.flatOnix3);
-            this.panel2.Controls.Add(this.rutinasButton);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel2.Location = new System.Drawing.Point(0, 66);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(318, 672);
             this.panel2.TabIndex = 6;
+            // 
+            // rutinasButton
+            // 
+            this.rutinasButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.rutinasButton.FlatAppearance.BorderSize = 0;
+            this.rutinasButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rutinasButton.Font = new System.Drawing.Font("MV Boli", 21.75F, System.Drawing.FontStyle.Bold);
+            this.rutinasButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.rutinasButton.Image = ((System.Drawing.Image)(resources.GetObject("rutinasButton.Image")));
+            this.rutinasButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.rutinasButton.Location = new System.Drawing.Point(23, 235);
+            this.rutinasButton.Name = "rutinasButton";
+            this.rutinasButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.rutinasButton.Size = new System.Drawing.Size(258, 185);
+            this.rutinasButton.TabIndex = 4;
+            this.rutinasButton.Text = "RUTINAS";
+            this.rutinasButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.rutinasButton.UseVisualStyleBackColor = true;
+            this.rutinasButton.Click += new System.EventHandler(this.rutinasButton_Click);
+            // 
+            // clientesButton
+            // 
+            this.clientesButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.clientesButton.FlatAppearance.BorderSize = 0;
+            this.clientesButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.clientesButton.Font = new System.Drawing.Font("MV Boli", 21.75F, System.Drawing.FontStyle.Bold);
+            this.clientesButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.clientesButton.Image = ((System.Drawing.Image)(resources.GetObject("clientesButton.Image")));
+            this.clientesButton.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.clientesButton.Location = new System.Drawing.Point(23, 15);
+            this.clientesButton.Name = "clientesButton";
+            this.clientesButton.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.clientesButton.Size = new System.Drawing.Size(258, 185);
+            this.clientesButton.TabIndex = 0;
+            this.clientesButton.Text = "CLIENTES";
+            this.clientesButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.clientesButton.UseVisualStyleBackColor = true;
+            this.clientesButton.Click += new System.EventHandler(this.clientesButton_Click);
             // 
             // button1
             // 
@@ -140,28 +178,16 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "Importar datos";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // flatOnix3
             // 
             this.flatOnix3.BackColor = System.Drawing.Color.Coral;
-            this.flatOnix3.Imagen = global::MainRoutinesProject.Properties.Resources.calendar;
+            this.flatOnix3.Imagen = null;
             this.flatOnix3.Location = new System.Drawing.Point(39, 426);
             this.flatOnix3.Name = "flatOnix3";
             this.flatOnix3.Size = new System.Drawing.Size(242, 165);
             this.flatOnix3.TabIndex = 2;
             this.flatOnix3.Texto = "HORARIOS";
-            // 
-            // rutinasButton
-            // 
-            this.rutinasButton.BackColor = System.Drawing.Color.Coral;
-            this.rutinasButton.Imagen = global::MainRoutinesProject.Properties.Resources.sport_1_;
-            this.rutinasButton.Location = new System.Drawing.Point(39, 220);
-            this.rutinasButton.Name = "rutinasButton";
-            this.rutinasButton.Size = new System.Drawing.Size(242, 162);
-            this.rutinasButton.TabIndex = 1;
-            this.rutinasButton.Texto = "RUTINAS";
-            this.rutinasButton.Click += new System.EventHandler(this.rutinasButton_Click);
             // 
             // panel3
             // 
@@ -170,25 +196,6 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(960, 672);
             this.panel3.TabIndex = 7;
-            // 
-            // button2
-            // 
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("MV Boli", 21.75F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
-            this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.Location = new System.Drawing.Point(23, 15);
-            this.button2.Name = "button2";
-            this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.button2.Size = new System.Drawing.Size(258, 185);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "CLIENTES";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // MainForm
             // 
@@ -221,11 +228,11 @@
         private System.Windows.Forms.Button minimize;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private OnixLibrary.CustomControls.FlatOnix rutinasButton;
         private OnixLibrary.CustomControls.FlatOnix flatOnix3;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button clientesButton;
+        private System.Windows.Forms.Button rutinasButton;
     }
 }
 

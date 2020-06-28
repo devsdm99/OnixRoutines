@@ -19,11 +19,23 @@ namespace MainRoutinesProject.Screens
             InitializeComponent();
         }
 
-        private void flatOnix1_Click(object sender, EventArgs e)
+
+        private void newRutina_Click(object sender, EventArgs e)
         {
-            EjercicioRutina nuevo = new EjercicioRutina() {};
+            EjercicioRutina nuevo = new EjercicioRutina() { };
             ejercicios.Add(nuevo);
             flowLayoutPanel1.Controls.Add(nuevo);
+        }
+
+        private void finalizarButton_Click(object sender, EventArgs e)
+        {
+            foreach (var item in flowLayoutPanel1.Controls)
+            {
+                if(item is EjercicioRutina)
+                {
+                    ((EjercicioRutina)item).
+                }
+            }
         }
     }
 }
