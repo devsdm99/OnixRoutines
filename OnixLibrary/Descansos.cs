@@ -14,7 +14,16 @@ namespace OnixLibrary
     
     public partial class Descansos
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Descansos()
+        {
+            this.EjercicioRutina = new HashSet<EjercicioRutina>();
+        }
+    
         public int IdDescanso { get; set; }
         public string TiempoDescanso { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EjercicioRutina> EjercicioRutina { get; set; }
     }
 }

@@ -33,7 +33,7 @@ namespace MainRoutinesProject.Screens
             {
                 if(item is EjercicioRutina)
                 {
-                    ((EjercicioRutina)item).
+                    //((EjercicioRutina)item).
                 }
             }
         }

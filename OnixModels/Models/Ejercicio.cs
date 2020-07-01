@@ -8,8 +8,8 @@ namespace OnixModels.Models
 {
     public class Ejercicio
     {
-        public int IdEjercicio { get; set; }
-        public int IdGrupoMuscular { get; set; }
+        public int? IdEjercicio { get; set; }
+        public int? IdGrupoMuscular { get; set; }
         public string Nombre { get; set; }
     }
 }

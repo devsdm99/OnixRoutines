@@ -5,16 +5,21 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="77361d36918e404b8368054b73409ac5" Name="Diagram1">
-        <EntityTypeShape EntityType="OnixDBModel.Clientes" Width="1.5" PointX="2.375" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnixDBModel.Comentarios" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnixDBModel.Clientes" Width="1.5" PointX="10.25" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnixDBModel.Comentarios" Width="1.5" PointX="8.375" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="OnixDBModel.Descansos" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnixDBModel.EjercicioRutina" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnixDBModel.Ejercicios" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnixDBModel.GruposMusculares" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="OnixDBModel.Rutinas" Width="1.5" PointX="5.25" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnixDBModel.EjercicioRutina" Width="1.5" PointX="4.625" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnixDBModel.Ejercicios" Width="1.5" PointX="3.375" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnixDBModel.GruposMusculares" Width="1.5" PointX="0.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnixDBModel.Rutinas" Width="1.5" PointX="6.5" PointY="2.875" IsExpanded="true" />
         <AssociationConnector Association="OnixDBModel.FK_Rutinas_Cliente" ManuallyRouted="false" />
         <AssociationConnector Association="OnixDBModel.FK_Ejercicios_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="OnixDBModel.FK_Rutinas_Descanso" ManuallyRouted="false" />
+        <AssociationConnector Association="OnixDBModel.FK_EJERCICIO" />
+        <AssociationConnector Association="OnixDBModel.FK_Rutinas_Descanso1" />
+        <AssociationConnector Association="OnixDBModel.FK_COMENTARIO" />
+        <AssociationConnector Association="OnixDBModel.FK_DESCANSO" />
+        <AssociationConnector Association="OnixDBModel.FK_GRUPO_MUSCULAR" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -18,14 +18,17 @@ namespace OnixLibrary
         public Ejercicios()
         {
             this.Rutinas = new HashSet<Rutinas>();
+            this.EjercicioRutina = new HashSet<EjercicioRutina>();
         }
     
         public int IdEjercicio { get; set; }
-        public int idGrupoMuscular { get; set; }
+        public Nullable<int> idGrupoMuscular { get; set; }
         public string Nombre { get; set; }
     
         public virtual GruposMusculares GruposMusculares { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Rutinas> Rutinas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EjercicioRutina> EjercicioRutina { get; set; }
     }
 }

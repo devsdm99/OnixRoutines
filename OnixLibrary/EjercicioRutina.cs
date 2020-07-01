@@ -14,6 +14,12 @@ namespace OnixLibrary
     
     public partial class EjercicioRutina
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public EjercicioRutina()
+        {
+            this.Rutinas = new HashSet<Rutinas>();
+        }
+    
         public int IdEjercicioRutina { get; set; }
         public Nullable<int> idEjercicio { get; set; }
         public Nullable<int> idGrupoMuscular { get; set; }
@@ -22,5 +28,12 @@ namespace OnixLibrary
         public string Dia { get; set; }
         public Nullable<int> Series { get; set; }
         public Nullable<int> Repeticiones { get; set; }
+    
+        public virtual Ejercicios Ejercicios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Rutinas> Rutinas { get; set; }
+        public virtual Comentarios Comentarios { get; set; }
+        public virtual Descansos Descansos { get; set; }
+        public virtual GruposMusculares GruposMusculares { get; set; }
     }
 }

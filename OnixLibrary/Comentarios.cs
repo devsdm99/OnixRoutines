@@ -14,7 +14,16 @@ namespace OnixLibrary
     
     public partial class Comentarios
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Comentarios()
+        {
+            this.EjercicioRutina = new HashSet<EjercicioRutina>();
+        }
+    
         public int IdComentario { get; set; }
         public string Comentario { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EjercicioRutina> EjercicioRutina { get; set; }
     }
 }

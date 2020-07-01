@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OnixDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OnixDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="IdCliente" />
@@ -45,9 +45,9 @@
           <Key>
             <PropertyRef Name="IdEjercicio" />
           </Key>
-          <Property Name="IdEjercicio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdEjercicio" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="idGrupoMuscular" Type="int" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="GruposMusculares">
           <Key>
@@ -62,17 +62,53 @@
           </Key>
           <Property Name="IdRutina" Type="int" Nullable="false" />
           <Property Name="idCliente" Type="int" />
-          <Property Name="idEjercicio" Type="int" />
+          <Property Name="idEjercicioRutina" Type="int" />
           <Property Name="NombreRutina" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Ejercicios_ToTable">
+        <Association Name="FK_COMENTARIO">
+          <End Role="Comentarios" Type="Self.Comentarios" Multiplicity="0..1" />
+          <End Role="EjercicioRutina" Type="Self.EjercicioRutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comentarios">
+              <PropertyRef Name="IdComentario" />
+            </Principal>
+            <Dependent Role="EjercicioRutina">
+              <PropertyRef Name="idComentario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESCANSO">
+          <End Role="Descansos" Type="Self.Descansos" Multiplicity="0..1" />
+          <End Role="EjercicioRutina" Type="Self.EjercicioRutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descansos">
+              <PropertyRef Name="IdDescanso" />
+            </Principal>
+            <Dependent Role="EjercicioRutina">
+              <PropertyRef Name="idDescanso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EJERCICIO">
+          <End Role="Ejercicios" Type="Self.Ejercicios" Multiplicity="0..1" />
+          <End Role="EjercicioRutina" Type="Self.EjercicioRutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ejercicios">
+              <PropertyRef Name="IdEjercicio" />
+            </Principal>
+            <Dependent Role="EjercicioRutina">
+              <PropertyRef Name="idEjercicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_MUSCULAR">
           <End Role="GruposMusculares" Type="Self.GruposMusculares" Multiplicity="0..1" />
-          <End Role="Ejercicios" Type="Self.Ejercicios" Multiplicity="*" />
+          <End Role="EjercicioRutina" Type="Self.EjercicioRutina" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="GruposMusculares">
               <PropertyRef Name="IdGrupoMuscular" />
             </Principal>
-            <Dependent Role="Ejercicios">
+            <Dependent Role="EjercicioRutina">
               <PropertyRef Name="idGrupoMuscular" />
             </Dependent>
           </ReferentialConstraint>
@@ -90,14 +126,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rutinas_Descanso">
-          <End Role="Ejercicios" Type="Self.Ejercicios" Multiplicity="0..1" />
+          <End Role="EjercicioRutina" Type="Self.EjercicioRutina" Multiplicity="0..1" />
           <End Role="Rutinas" Type="Self.Rutinas" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Ejercicios">
-              <PropertyRef Name="IdEjercicio" />
+            <Principal Role="EjercicioRutina">
+              <PropertyRef Name="IdEjercicioRutina" />
             </Principal>
             <Dependent Role="Rutinas">
-              <PropertyRef Name="idEjercicio" />
+              <PropertyRef Name="idEjercicioRutina" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -109,21 +145,32 @@
           <EntitySet Name="Ejercicios" EntityType="Self.Ejercicios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GruposMusculares" EntityType="Self.GruposMusculares" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rutinas" EntityType="Self.Rutinas" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Ejercicios_ToTable" Association="Self.FK_Ejercicios_ToTable">
-            <End Role="GruposMusculares" EntitySet="GruposMusculares" />
+          <AssociationSet Name="FK_COMENTARIO" Association="Self.FK_COMENTARIO">
+            <End Role="Comentarios" EntitySet="Comentarios" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESCANSO" Association="Self.FK_DESCANSO">
+            <End Role="Descansos" EntitySet="Descansos" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EJERCICIO" Association="Self.FK_EJERCICIO">
             <End Role="Ejercicios" EntitySet="Ejercicios" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_MUSCULAR" Association="Self.FK_GRUPO_MUSCULAR">
+            <End Role="GruposMusculares" EntitySet="GruposMusculares" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
           </AssociationSet>
           <AssociationSet Name="FK_Rutinas_Cliente" Association="Self.FK_Rutinas_Cliente">
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Rutinas" EntitySet="Rutinas" />
           </AssociationSet>
           <AssociationSet Name="FK_Rutinas_Descanso" Association="Self.FK_Rutinas_Descanso">
-            <End Role="Ejercicios" EntitySet="Ejercicios" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
             <End Role="Rutinas" EntitySet="Rutinas" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OnixDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -143,6 +190,7 @@
           </Key>
           <Property Name="IdComentario" Type="Int32" Nullable="false" />
           <Property Name="Comentario" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EjercicioRutina" Relationship="OnixDBModel.FK_COMENTARIO" FromRole="Comentarios" ToRole="EjercicioRutina" />
         </EntityType>
         <EntityType Name="Descansos">
           <Key>
@@ -150,6 +198,7 @@
           </Key>
           <Property Name="IdDescanso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TiempoDescanso" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="EjercicioRutina" Relationship="OnixDBModel.FK_DESCANSO" FromRole="Descansos" ToRole="EjercicioRutina" />
         </EntityType>
         <EntityType Name="EjercicioRutina">
           <Key>
@@ -163,6 +212,11 @@
           <Property Name="Dia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Series" Type="Int32" />
           <Property Name="Repeticiones" Type="Int32" />
+          <NavigationProperty Name="Ejercicios" Relationship="OnixDBModel.FK_EJERCICIO" FromRole="EjercicioRutina" ToRole="Ejercicios" />
+          <NavigationProperty Name="Rutinas" Relationship="OnixDBModel.FK_Rutinas_Descanso1" FromRole="EjercicioRutina" ToRole="Rutinas" />
+          <NavigationProperty Name="Comentarios" Relationship="OnixDBModel.FK_COMENTARIO" FromRole="EjercicioRutina" ToRole="Comentarios" />
+          <NavigationProperty Name="Descansos" Relationship="OnixDBModel.FK_DESCANSO" FromRole="EjercicioRutina" ToRole="Descansos" />
+          <NavigationProperty Name="GruposMusculares" Relationship="OnixDBModel.FK_GRUPO_MUSCULAR" FromRole="EjercicioRutina" ToRole="GruposMusculares" />
         </EntityType>
         <EntityType Name="Ejercicios">
           <Key>
@@ -170,9 +224,10 @@
           </Key>
           <Property Name="IdEjercicio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idGrupoMuscular" Type="Int32" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="GruposMusculares" Relationship="Self.FK_Ejercicios_ToTable" FromRole="Ejercicios" ToRole="GruposMusculares" />
           <NavigationProperty Name="Rutinas" Relationship="Self.FK_Rutinas_Descanso" FromRole="Ejercicios" ToRole="Rutinas" />
+          <NavigationProperty Name="EjercicioRutina" Relationship="OnixDBModel.FK_EJERCICIO" FromRole="Ejercicios" ToRole="EjercicioRutina" />
         </EntityType>
         <EntityType Name="GruposMusculares">
           <Key>
@@ -181,6 +236,7 @@
           <Property Name="IdGrupoMuscular" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Ejercicios" Relationship="Self.FK_Ejercicios_ToTable" FromRole="GruposMusculares" ToRole="Ejercicios" />
+          <NavigationProperty Name="EjercicioRutina" Relationship="OnixDBModel.FK_GRUPO_MUSCULAR" FromRole="GruposMusculares" ToRole="EjercicioRutina" />
         </EntityType>
         <EntityType Name="Rutinas">
           <Key>
@@ -192,6 +248,8 @@
           <Property Name="NombreRutina" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Clientes" Relationship="Self.FK_Rutinas_Cliente" FromRole="Rutinas" ToRole="Clientes" />
           <NavigationProperty Name="Ejercicios" Relationship="Self.FK_Rutinas_Descanso" FromRole="Rutinas" ToRole="Ejercicios" />
+          <Property Name="idEjercicioRutina" Type="Int32" />
+          <NavigationProperty Name="EjercicioRutina" Relationship="OnixDBModel.FK_Rutinas_Descanso1" FromRole="Rutinas" ToRole="EjercicioRutina" />
         </EntityType>
         <Association Name="FK_Rutinas_Cliente">
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
@@ -249,7 +307,87 @@
             <End Role="Ejercicios" EntitySet="Ejercicios" />
             <End Role="Rutinas" EntitySet="Rutinas" />
           </AssociationSet>
+          <AssociationSet Name="FK_EJERCICIO" Association="OnixDBModel.FK_EJERCICIO">
+            <End Role="Ejercicios" EntitySet="Ejercicios" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rutinas_Descanso1" Association="OnixDBModel.FK_Rutinas_Descanso1">
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+            <End Role="Rutinas" EntitySet="Rutinas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COMENTARIO" Association="OnixDBModel.FK_COMENTARIO">
+            <End Role="Comentarios" EntitySet="Comentarios" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DESCANSO" Association="OnixDBModel.FK_DESCANSO">
+            <End Role="Descansos" EntitySet="Descansos" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GRUPO_MUSCULAR" Association="OnixDBModel.FK_GRUPO_MUSCULAR">
+            <End Role="GruposMusculares" EntitySet="GruposMusculares" />
+            <End Role="EjercicioRutina" EntitySet="EjercicioRutina" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="FK_EJERCICIO">
+          <End Type="OnixDBModel.Ejercicios" Role="Ejercicios" Multiplicity="0..1" />
+          <End Type="OnixDBModel.EjercicioRutina" Role="EjercicioRutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ejercicios">
+              <PropertyRef Name="IdEjercicio" />
+            </Principal>
+            <Dependent Role="EjercicioRutina">
+              <PropertyRef Name="idEjercicio" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rutinas_Descanso1">
+          <End Type="OnixDBModel.EjercicioRutina" Role="EjercicioRutina" Multiplicity="0..1" />
+          <End Type="OnixDBModel.Rutinas" Role="Rutinas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EjercicioRutina">
+              <PropertyRef Name="IdEjercicioRutina" />
+            </Principal>
+            <Dependent Role="Rutinas">
+              <PropertyRef Name="idEjercicioRutina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COMENTARIO">
+          <End Type="OnixDBModel.Comentarios" Role="Comentarios" Multiplicity="0..1" />
+          <End Type="OnixDBModel.EjercicioRutina" Role="EjercicioRutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Comentarios">
+              <PropertyRef Name="IdComentario" />
+            </Principal>
+            <Dependent Role="EjercicioRutina">
+              <PropertyRef Name="idComentario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DESCANSO">
+          <End Type="OnixDBModel.Descansos" Role="Descansos" Multiplicity="0..1" />
+          <End Type="OnixDBModel.EjercicioRutina" Role="EjercicioRutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descansos">
+              <PropertyRef Name="IdDescanso" />
+            </Principal>
+            <Dependent Role="EjercicioRutina">
+              <PropertyRef Name="idDescanso" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GRUPO_MUSCULAR">
+          <End Type="OnixDBModel.GruposMusculares" Role="GruposMusculares" Multiplicity="0..1" />
+          <End Type="OnixDBModel.EjercicioRutina" Role="EjercicioRutina" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GruposMusculares">
+              <PropertyRef Name="IdGrupoMuscular" />
+            </Principal>
+            <Dependent Role="EjercicioRutina">
+              <PropertyRef Name="idGrupoMuscular" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -316,9 +454,9 @@
           <EntitySetMapping Name="Rutinas">
             <EntityTypeMapping TypeName="OnixDBModel.Rutinas">
               <MappingFragment StoreEntitySet="Rutinas">
+                <ScalarProperty Name="idEjercicioRutina" ColumnName="idEjercicioRutina" />
                 <ScalarProperty Name="IdRutina" ColumnName="IdRutina" />
                 <ScalarProperty Name="idCliente" ColumnName="idCliente" />
-                <ScalarProperty Name="idEjercicio" ColumnName="idEjercicio" />
                 <ScalarProperty Name="NombreRutina" ColumnName="NombreRutina" />
               </MappingFragment>
             </EntityTypeMapping>

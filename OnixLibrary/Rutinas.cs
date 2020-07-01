@@ -18,8 +18,10 @@ namespace OnixLibrary
         public Nullable<int> idCliente { get; set; }
         public Nullable<int> idEjercicio { get; set; }
         public string NombreRutina { get; set; }
+        public Nullable<int> idEjercicioRutina { get; set; }
     
         public virtual Clientes Clientes { get; set; }
         public virtual Ejercicios Ejercicios { get; set; }
+        public virtual EjercicioRutina EjercicioRutina { get; set; }
     }
 }
