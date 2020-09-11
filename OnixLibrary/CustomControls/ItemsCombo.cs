@@ -8,19 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MainRoutinesProject.Screens
+namespace OnixLibrary.CustomControls
 {
-    public partial class ClientesScreen : Form
+    public partial class ItemsCombo : ComboBox
     {
-        public ClientesScreen()
+        public ItemsCombo()
         {
             InitializeComponent();
         }
+        public int Id { get; set; }
+        public string Texto { get; set; }
 
-        public void init()
+        protected override void OnPaint(PaintEventArgs pe)
         {
-            this.Show();
-
+            base.OnPaint(pe);
         }
 
     }

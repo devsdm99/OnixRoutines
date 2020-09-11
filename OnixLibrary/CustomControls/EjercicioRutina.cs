@@ -3,29 +3,42 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Data;
 using System.Windows.Forms;
-using OnixLibrary.BBDD;
 using System.Reflection;
 using System.IO;
 using OnixModels.Models;
+using System.ComponentModel;
+using System.Linq;
 
 namespace OnixLibrary.CustomControls
 {
-    public partial class EjercicioRutina : UserControl
+    public partial class EjercicioRutina : UserControl, INotifyPropertyChanged
     {
 
+        public EjercicioRutina()
+        {
+            InitializeComponent();
+        }
 
         private List<GrupoMuscular> _gruposMuscularesList = new List<GrupoMuscular>();
         private List<Ejercicio> _ejerciciosList = new List<Ejercicio>();
-        private string _grupoSeleccionado;
-        private string _ejercicioSeleccionado;
-        private string _dia;
+        private int _IdgrupoSeleccionado;
+        private int _IdejercicioSeleccionado;
+        private int _dia;
         private int _series;
         private int _reps;
         private List<Descanso> _descansosList = new List<Descanso>();
-        private List<Comentario> _notasList = new List<Comentario>();
+        private List<Comentario> _comentariosList = new List<Comentario>();
+        private bool _pendienteEliminar;
+
+        #region properties
+        public bool IsElimianar
+        {
+            get { return _pendienteEliminar; }
+            set { _pendienteEliminar = value; }
+        }
 
 
-        private EjerciciosRutinaController controlador;
+
 
         public List<GrupoMuscular> GruposMusculares {
             get { return _gruposMuscularesList; }
@@ -37,50 +50,73 @@ namespace OnixLibrary.CustomControls
             set {_ejerciciosList = value; }
         }
 
+        private string _ejercicioSeleccionado;
 
-        public string GrupoSeleccionado
-        {
-            get { return _grupoSeleccionado; }
-            set { _grupoSeleccionado = value; }
-        }
-
-
-
-        public string EjercicioSeleccionado
+        public string Ejercicio
         {
             get { return _ejercicioSeleccionado; }
             set { _ejercicioSeleccionado = value; }
         }
 
-        public string Dia
+
+        public int IdGrupoSeleccionado
+        {
+            get { return _IdgrupoSeleccionado; }
+            set {
+                _IdgrupoSeleccionado = value;
+                InvokePropertyChanged(new PropertyChangedEventArgs("IdGrupoSeleccionado"));
+
+            }
+        }
+
+
+
+        public int IdEjercicioSeleccionado
+        {
+            get { return _IdejercicioSeleccionado; }
+            set {
+                _IdejercicioSeleccionado = value;
+                InvokePropertyChanged(new PropertyChangedEventArgs("IdEjercicioSeleccionado"));
+            }
+        }
+
+        public int Dia
         {
             get { return _dia; }
-            set { _dia = value; }
+            set {   
+                  _dia = value;
+                  InvokePropertyChanged(new PropertyChangedEventArgs("Dia"));    
+            }
         }
 
         public int Series
         {
             get { return _series; }
-            set { _series = value; }
+            set {
+                _series = value;
+                InvokePropertyChanged(new PropertyChangedEventArgs("Series"));
+
+            }
         }
 
         public int Repeticiones
         {
             get { return _reps; }
-            set { _reps = value; }
+            set { 
+                _reps = value;
+                InvokePropertyChanged(new PropertyChangedEventArgs("Repeticiones"));
+
+            }
         }
 
 
-        private Image image;
+        private int _idDescanso;
 
-        public Image Imagen
+        public int IdDescanso
         {
-            get { return image; }
-            set { image = value; }
+            get { return _idDescanso; }
+            set { _idDescanso = value; }
         }
-
-
-
 
         public List<Descanso> Descansos
         {
@@ -89,32 +125,102 @@ namespace OnixLibrary.CustomControls
         }
 
 
+        private int _idComentario;
 
-        public List<Comentario> Notas
+        public int IdComentario
         {
-            get { return _notasList; }
-            set { _notasList = value; }
+            get { return _idComentario; }
+            set { _idComentario = value; }
         }
 
-        public EjercicioRutina()
+        public List<Comentario> Comentarios
         {
-            InitializeComponent();
+            get { return _comentariosList; }
+            set { _comentariosList = value; }
+        }
+
+        private string _comentario;
+
+        public string Comentario
+        {
+            get { return _comentario; }
+            set { _comentario = value; }
+        }
+
+        private string _descanso;
+
+        public string Descanso
+        {
+            get { return _descanso; }
+            set { _descanso = value; }
         }
 
 
-        private EjerciciosRutinaController GetControlador()
+
+        private string _imagePath;
+
+        public string ImagePath
         {
-            if (controlador == null)
-            {
-                controlador = new EjerciciosRutinaController();
-            }
-            return controlador;
+            get { return _imagePath; }
+            set { _imagePath = value; }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
+        public void InvokePropertyChanged(PropertyChangedEventArgs e)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) handler(this, e);
+        }
+
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+            BindGruposMusuclaesList();
+            BindDescansos();
+            BindComentarios();
+            ImagePath = "";
+
+            diaTB.DataBindings.Add("Text", this, "Dia");
+            SerTB.DataBindings.Add("Text", this, "Series");
+            RepsTB.DataBindings.Add("Text", this, "Repeticiones");     
+
+        }
+
+        private void BindGruposMusuclaesList()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = _gruposMuscularesList;
+            grupoCombo.DataSource = bs.DataSource;
+            grupoCombo.DisplayMember = "Nombre";
+            grupoCombo.ValueMember = "IdGrupoMuscular";
+        }
+
+        private void BindDescansos()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = _descansosList;
+            descansoCombo.DataSource = bs.DataSource;
+            descansoCombo.DisplayMember = "TiempoDescanso";
+            descansoCombo.ValueMember = "IdDescanso";
+        }
+        private void BindComentarios()
+        {
+            BindingSource bs = new BindingSource();
+            bs.DataSource = _comentariosList;
+            notasCombo.DataSource = bs.DataSource;
+            notasCombo.DisplayMember = "TipoComentario";
+            notasCombo.ValueMember = "IdComentario";
+        }
+
+      
         private void EjercicioRutina_Load(object sender, EventArgs e)
         {
-            _gruposMuscularesList = GetControlador().GetGruposController().GetAllGruposMusculaes();
+            GruposMusculares = OnixConnection.GetAllGruposMusculares();
 
-            foreach (var item in _gruposMuscularesList)
+            foreach (var item in GruposMusculares)
             {
                 grupoCombo.Items.Add(item.Nombre); //AÑADIMOS LOS VALORES AL COMBO
             }
@@ -125,28 +231,37 @@ namespace OnixLibrary.CustomControls
 
         private void CargarDescansos()
         {
-            _descansosList = GetControlador().GetAllDescansos();
-            foreach (var item in _descansosList)
+            Descansos = OnixConnection.GetAllDescanansos();
+
+            foreach (var item in Descansos)
             {
                 descansoCombo.Items.Add(item.TiempoDescanso);
             }
+            IdDescanso = Descansos[0].IdDescanso;
+            Descanso = Descansos.Select(x => x.TiempoDescanso).FirstOrDefault();
+
         }
 
         private void CargarComentarios()
         {
-            _notasList = GetControlador().GetComentarios();
+            Comentarios = OnixConnection.GetAllComentarios();
 
-            foreach (var item in _notasList)
+            foreach (var item in Comentarios)
             {
                 notasCombo.Items.Add(item.TipoComentario);
             }
+            IdComentario = Comentarios[0].idComentario;
+            Comentario = Comentarios.Select(x => x.TipoComentario).FirstOrDefault();
+
         }
 
         private void grupoCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ejercicoCombo.Items.Clear();
+            ejercicoCombo.Text = "";
             int idGrupo = GruposMusculares[grupoCombo.SelectedIndex].IdGrupoMuscular;
 
-            _ejerciciosList = GetControlador().GetEjerciciosController().GetExercicesByGroupId(idGrupo);
+            _ejerciciosList = OnixConnection.GetExercicesByGroupId(idGrupo);
 
             if (_ejerciciosList.Count > 0)
             {
@@ -155,16 +270,19 @@ namespace OnixLibrary.CustomControls
                 {
                     ejercicoCombo.Items.Add(item.Nombre);
                 }
+                IdGrupoSeleccionado = GruposMusculares[grupoCombo.SelectedIndex].IdGrupoMuscular;
+                Ejercicio = Ejercicios.Select(x => x.Nombre).FirstOrDefault();
+                ejercicoCombo.SelectedIndex = 0;
             }
 
-            _grupoSeleccionado = grupoCombo.SelectedItem.ToString();
 
 
         }
 
         private void ejercicoCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Ejercicios_Fotos");
+            string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resources\Ejercicios_Fotos");
+
             foreach (string file in Directory.GetFiles(path, "*.jpg"))
             {
                 string[] elements = file.Split('\\');
@@ -172,13 +290,91 @@ namespace OnixLibrary.CustomControls
                 elements = nameEjercicio.Split('.');
                 nameEjercicio = elements[0];
                 nameEjercicio = nameEjercicio.Trim().Replace(' ', '_');
+
                 if (ejercicoCombo.SelectedItem.ToString().Equals(nameEjercicio))
                 {
                     imagenRutina.Image = Image.FromFile(file);
+                    ImagePath = file;
+                    break;
                 }
-               
+                else
+                {
+                    imagenRutina.Image = null;
+                    ImagePath = "";
+                }
+
             }
-            _ejercicioSeleccionado = ejercicoCombo.SelectedItem.ToString();
+
+            Ejercicio = ejercicoCombo.SelectedItem.ToString().Replace('_',' ');
+            IdEjercicioSeleccionado = Ejercicios[ejercicoCombo.SelectedIndex].IdEjercicio;
+
+
+        }
+
+        private void notasCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IdComentario = Comentarios[notasCombo.SelectedIndex].idComentario;
+            Comentario = Comentarios[notasCombo.SelectedIndex].TipoComentario;
+
+        }
+
+        private void descansoCombo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IdDescanso = Descansos[descansoCombo.SelectedIndex].IdDescanso;
+            Descanso = Descansos[descansoCombo.SelectedIndex].TiempoDescanso;
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (!IsElimianar) {
+                IsElimianar = true;
+                CambiarEstadoControles(false);
+            }
+            else
+            {
+                IsElimianar = false;
+                CambiarEstadoControles(true);
+            }
+
+        }
+
+        private void CambiarEstadoControles(bool estado)
+        {
+
+            foreach (Control item in this.Controls)
+            {
+                if (!(item is PictureBox))
+                {
+                    item.Enabled = estado;
+
+                }
+            }
+        }
+
+        private void borrar_MouseHover(object sender, EventArgs e)
+        {
+            borrar.BackColor = Color.Gray;
+        }
+
+        private void borrar_MouseLeave(object sender, EventArgs e)
+        {
+            borrar.BackColor = Color.Transparent;
+        }
+
+        private void cargarImagen_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog dlg = new OpenFileDialog())
+            {
+                dlg.Title = "Open Image";
+                dlg.Filter = "Image Files (*.bmp;*.jpg;*.jpeg,*.png)|*.BMP;*.JPG;*.JPEG;*.PNG";
+
+                if (dlg.ShowDialog() == DialogResult.OK)
+                {
+                    imagenRutina.Image = new Bitmap(dlg.FileName);
+                    ImagePath = dlg.FileName;
+                }
+            }
         }
     }
 }

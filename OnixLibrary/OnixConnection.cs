@@ -1,60 +1,86 @@
 ﻿
 
+using Dapper;
+using OnixModels.Models;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
+using System.Data.SQLite;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace OnixLibrary
 {
 
-
-   public static class OnixConnection
+    public static class OnixConnection
     {
-        static string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\C# Project\OnixRoutines\OnixLibrary\BBDD\OnixDB.mdf;Integrated Security=True;Connect Timeout=30";
-        private static SqlConnection connection;
-        private static DataSet localTable;
-
-        private static void OpenConnection()
+        public static List<Ejercicio> ObtenerEjercicios()
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Ejercicio>("Select * from Ejercicios", new DynamicParameters());
+                return output.ToList();
+            }
+
         }
 
-        public static DataSet GetTableData(string tablename)
+        public static void InsertaEjercicio(Ejercicio ej)
         {
-
-            OpenConnection();
-            string queryString = "SELECT * FROM " + tablename;
-            SqlDataAdapter adapter = new SqlDataAdapter(queryString, connectionString);
-            connection.Close();
-            localTable = new DataSet();
-            adapter.Fill(localTable, tablename);
-
-            return localTable;
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Ejercicios (IdEjercicio, Nombre, IdGrupoMuscular) values (@IdEjercicio, @Nombre, @IdGrupoMuscular)", ej);
+            }
         }
 
 
-        public static void InsertaDatos()
+        private static string LoadConnectionString(string id = "Default")
         {
-
-            OpenConnection();
-            SqlCommand comando = connection.CreateCommand();
-            comando.CommandType = CommandType.Text;
-            comando.CommandText = "insert into ";
+            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
         }
 
-
-        public static void Inserta(string con)
+        public static List<Comentario> GetAllComentarios()
         {
-            OpenConnection();
-            SqlCommand query = connection.CreateCommand();
-            query.CommandType = CommandType.Text;
-            query.CommandText = con;
-
-            int fila = query.ExecuteNonQuery();
-
-            connection.Close();
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Comentario>("Select * from Comentarios", new DynamicParameters());
+                return output.ToList();
+            }
         }
 
+        public static List<Descanso> GetAllDescanansos()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Descanso>("Select * from Descansos", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
+        public static List<GrupoMuscular> GetAllGruposMusculares()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<GrupoMuscular>("Select * from GruposMusculares", new DynamicParameters());
+                return output.ToList();
+            }
+        }
+
+        public static List<Ejercicio> GetExercicesByGroupId(int idGrupo)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Ejercicio>("Select * from Ejercicios where IdGrupoMuscular = " + idGrupo, new DynamicParameters());
+                return output.ToList();
+            }
+        }
+        public static List<Ejercicio> GetAllEjercicios()
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                var output = cnn.Query<Ejercicio>("Select * from Ejercicios", new DynamicParameters());
+                return output.ToList();
+            }
+        }
     }
 }
