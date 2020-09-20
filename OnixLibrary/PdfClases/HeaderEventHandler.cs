@@ -28,7 +28,7 @@ namespace OnixLibrary.PdfClases
             PdfDocument pdfDoc = docEvent.GetDocument();
             PdfPage page = docEvent.GetPage();
 
-            Rectangle rootArea = new Rectangle(35, page.GetPageSize().GetTop() - 70, page.GetPageSize().GetRight() - 70,35);
+            Rectangle rootArea = new Rectangle(35, page.GetPageSize().GetTop()- 40, page.GetPageSize().GetRight() - 70, 35);
             Canvas canvas = new Canvas(page, rootArea);
             canvas.Add(getTable(docEvent));
         }
@@ -37,26 +37,23 @@ namespace OnixLibrary.PdfClases
         {
 
             Style styleText = new Style().SetTextAlignment(TextAlignment.RIGHT).SetFontSize(12).SetBold();
-            Style styleDatos = new Style().SetTextAlignment(TextAlignment.RIGHT).SetFontSize(10);
-
+            Style styleDatos = new Style().SetTextAlignment(TextAlignment.RIGHT).SetFontSize(8);
             Style styleCell = new Style().SetBorder(Border.NO_BORDER);
 
             float[] cellWidth = { 10f, 50f, 33f };
 
             Table tableEvent = new Table(UnitValue.CreatePercentArray(cellWidth)).UseAllAvailableWidth().SetBorder(Border.NO_BORDER);
 
-            Cell cell = new Cell().Add(Img.SetAutoScale(true)).AddStyle(styleCell);
-            tableEvent.AddCell(cell.AddStyle(styleCell)).SetTextAlignment(TextAlignment.LEFT);
+            Cell cell = new Cell().Add(Img.SetAutoScale(true)).AddStyle(styleCell).SetBackgroundColor(ColorConstants.GREEN);
+            tableEvent.AddCell(cell).SetTextAlignment(TextAlignment.RIGHT);
 
-            cell = new Cell().Add(new Paragraph("CENTRE TERAPÈUTIC ONIX").AddStyle(styleText)).AddStyle(styleCell);
+            cell = new Cell().Add(new Paragraph("CENTRE TERAPÈUTIC ONIX").AddStyle(styleText)).AddStyle(styleCell).SetBackgroundColor(ColorConstants.RED);
             tableEvent.AddCell(cell);
 
             cell = new Cell()
                 .Add(new Paragraph("Tel.: 931 058 931\n"))
-                .Add(new Paragraph("Mail: centerapeutic.onix @gmail.com")).AddStyle(styleDatos).AddStyle(styleCell);
+                .Add(new Paragraph("Mail: centerapeutic.onix @gmail.com")).AddStyle(styleDatos).AddStyle(styleCell).SetBackgroundColor(ColorConstants.BLUE);
             tableEvent.AddCell(cell);
-
-
 
 
             return tableEvent;

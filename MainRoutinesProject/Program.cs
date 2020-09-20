@@ -1,11 +1,11 @@
-﻿using MainRoutinesProject.Screens;
+﻿using Onix.Screens;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MainRoutinesProject
+namespace Onix
 {
     static class Program
     {
@@ -17,7 +17,7 @@ namespace MainRoutinesProject
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NuevaRutinaScreen());
+            Application.Run(new MainForm());
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿
-
-using Dapper;
+﻿using Dapper;
 using OnixModels.Models;
 using System;
 using System.Collections.Generic;
@@ -15,6 +13,7 @@ namespace OnixLibrary
 
     public static class OnixConnection
     {
+        #region Gets
         public static List<Ejercicio> ObtenerEjercicios()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -24,21 +23,6 @@ namespace OnixLibrary
             }
 
         }
-
-        public static void InsertaEjercicio(Ejercicio ej)
-        {
-            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
-            {
-                cnn.Execute("insert into Ejercicios (IdEjercicio, Nombre, IdGrupoMuscular) values (@IdEjercicio, @Nombre, @IdGrupoMuscular)", ej);
-            }
-        }
-
-
-        private static string LoadConnectionString(string id = "Default")
-        {
-            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
-        }
-
         public static List<Comentario> GetAllComentarios()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -56,7 +40,6 @@ namespace OnixLibrary
                 return output.ToList();
             }
         }
-
         public static List<GrupoMuscular> GetAllGruposMusculares()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -82,5 +65,61 @@ namespace OnixLibrary
                 return output.ToList();
             }
         }
+
+        #endregion
+
+
+        #region Inserts
+        public static void InsertaEjercicio(Ejercicio ej)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Ejercicios (Nombre, IdGrupoMuscular) values (@Nombre, @IdGrupoMuscular)", ej);
+            }
+        }
+        public static void InsertarGrupoMuscular(GrupoMuscular ej)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into GruposMusculares (Nombre) values (@Nombre)", ej);
+            }
+        }
+        #endregion
+
+
+        #region Deletes
+
+        public static void DeleteGrupoMuscular(GrupoMuscular ej)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from GruposMusculares where IdGrupoMuscular = (@IdGrupoMuscular) And Nombre = (@Nombre)", ej);
+            }
+        }
+
+        public static void DeleteEjercicio(Ejercicio ej)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from Ejercicios where IdEjercicio = (@IdEjercicio) And Nombre = (@Nombre) And IdGrupoMuscular = (@IdGrupoMuscular)", ej);
+            }
+        }
+
+        #endregion
+
+
+
+        #region Updates
+
+        #endregion
+
+        private static string LoadConnectionString(string id = "Default")
+        {
+            return ConfigurationManager.ConnectionStrings[id].ConnectionString;
+        }
+
+     
+
+      
     }
 }

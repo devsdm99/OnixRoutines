@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainRoutinesProject", "MainRoutinesProject\MainRoutinesProject.csproj", "{33D4677B-B5E8-4C4E-9B41-FC936BCF429A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onix", "MainRoutinesProject\Onix.csproj", "{33D4677B-B5E8-4C4E-9B41-FC936BCF429A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnixLibrary", "OnixLibrary\OnixLibrary.csproj", "{8043F194-43D5-4763-B811-E7AA8B1B0167}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnixModels", "OnixModels\OnixModels.csproj", "{D45EBD59-3333-477A-AD89-549DB6D5CC61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnixModels", "OnixModels\OnixModels.csproj", "{D45EBD59-3333-477A-AD89-549DB6D5CC61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

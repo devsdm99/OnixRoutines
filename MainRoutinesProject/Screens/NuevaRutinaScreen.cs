@@ -23,7 +23,7 @@ using Image = iText.Layout.Element.Image;
 using iText.Kernel.Events;
 using OnixLibrary.PdfClases;
 
-namespace MainRoutinesProject.Screens
+namespace Onix.Screens
 {
     public partial class NuevaRutinaScreen : Form
     {
@@ -93,177 +93,178 @@ namespace MainRoutinesProject.Screens
         }
         protected void GeneratePDF()
         {
-            //iTextSharp.text.Font boldFont = FontFactory.GetFont("Arial", 13, iTextSharp.text.Font.BOLD, new iTextSharp.text.BaseColor(0, 0, 0));
-            //iTextSharp.text.Font normalFont = FontFactory.GetFont("Arial", 12, iTextSharp.text.Font.NORMAL, new iTextSharp.text.BaseColor(0, 0, 0));
-            //iTextSharp.text.Font titleFont = FontFactory.GetFont("Helvetica", 20, iTextSharp.text.Font.BOLD, new iTextSharp.text.BaseColor(0, 0, 0));
+            Style boldStyle = new Style().SetTextAlignment(TextAlignment.CENTER).SetFontSize(11).SetBold();
+            Style headerMusculo = new Style().SetTextAlignment(TextAlignment.LEFT).SetBold();
+
+            Style styleDatos = new Style().SetFontSize(9);
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Pdf Files|*.pdf";
+            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.ShowDialog();
+
+            string Imagenpath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
+            Image logo = new Image(ImageDataFactory.Create(Imagenpath + "\\Resources\\Icons\\OnixLogo.png"));
+
+            string path = saveFileDialog1.FileName;
+            try
+            {
+
+                PdfWriter pw = new PdfWriter(path);
+                PdfDocument pdfDocument = new PdfDocument(pw);
+
+                pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler(logo));
+                Document doc = new Document(pdfDocument, PageSize.LETTER);
+                doc.SetMargins(75, 15, 15, 15);
+
+                Table table = new Table(1).UseAllAvailableWidth(); //USAR TODO EL ANCHO DE LA HOJA
+
+                table.AddCell(new Cell().Add(new Paragraph("Nom:").SetFontSize(10))
+                                                                .SetTextAlignment(TextAlignment.LEFT)
+                                                                .SetBold().SetBorder(Border.NO_BORDER));
+
+                doc.Add(table);
 
 
-            //SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            //saveFileDialog1.Filter = "Pdf Files|*.pdf";
-            //saveFileDialog1.Title = "Save an Image File";
-            //saveFileDialog1.ShowDialog();
-            //string Imagenpath = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+                Table _table = new Table(7).UseAllAvailableWidth();
+                Cell _cell = new Cell().Add(new Paragraph(NombreTB.Text)).SetFontSize(10);
+                _table.AddCell(_cell);
 
-            //if (saveFileDialog1.FileName != "")
-            //{
-            //    var pdfDoc = new Document(PageSize.LETTER, 40f, 40f, 60f, 60f);
-            //    string path = saveFileDialog1.FileName;
-            //    PdfWriter.GetInstance(pdfDoc, new FileStream(path, FileMode.OpenOrCreate));
+                _cell = new Cell().Add(new Paragraph("Data inici rutina")).SetBorder(Border.NO_BORDER);
+                _table.AddCell(_cell.AddStyle(boldStyle));
 
-            //    pdfDoc.Open();
+                _cell = new Cell().Add(new Paragraph(FechaTB.Text)).SetFontSize(10).SetTextAlignment(TextAlignment.CENTER);
+                _table.AddCell(_cell);
 
-            //    using (FileStream fs = new FileStream(Imagenpath + "\\Resources\\Icons\\OnixLogo.png", FileMode.Open))
-            //    {
-            //        var png = iTextSharp.text.Image.GetInstance(System.Drawing.Image.FromStream(fs), ImageFormat.Png);
-            //        png.ScalePercent(5f);
-            //        png.SetAbsolutePosition(pdfDoc.Left, pdfDoc.Top);
-            //        pdfDoc.Add(png);
-            //    }
-            //    Paragraph title = new Paragraph("Onix Centre Terapèutic", titleFont);
-            //    title.Alignment = Element.ALIGN_CENTER;
-            //    pdfDoc.Add(title);
+                _cell = new Cell().Add(new Paragraph("Data final rutina")).SetBorder(Border.NO_BORDER);
+                _table.AddCell(_cell.AddStyle(boldStyle));
 
+                _cell = new Cell().Add(new Paragraph(FechaFinTB.Text)).SetFontSize(10).SetTextAlignment(TextAlignment.CENTER);
+                _table.AddCell(_cell);
+
+                _cell = new Cell().Add(new Paragraph("Rutina")).SetBorder(Border.NO_BORDER);
+                _table.AddCell(_cell.AddStyle(boldStyle));
+
+                _cell = new Cell().Add(new Paragraph(RutinaNumTB.Text).SetTextAlignment(TextAlignment.RIGHT));
+                _table.AddCell(_cell);
+                _table.SetMarginBottom(2f);
+                doc.Add(_table);
 
 
-            //    var spacer = new Paragraph("")
-            //    {
-            //        SpacingBefore = 10f,
-            //        SpacingAfter = 10f,
-            //    };
-            //    pdfDoc.Add(spacer);
+                Table tablaPrincipal = new Table(4).SetBorder(new SolidBorder(ColorConstants.RED, 2));
+                tablaPrincipal.SetHorizontalBorderSpacing(0f);
+                tablaPrincipal.SetVerticalBorderSpacing(0f);
+                var listaDia = ejercicios.OrderBy(x => x.Dia).ToList();
 
 
-            //    //HEADERS  PRINCIPAL
-            //    var headerTable = new PdfPTable(new[] { .75f, 2f })
-            //    {
-            //        HorizontalAlignment = Left,
-            //        WidthPercentage = 75,
-            //        DefaultCell = { MinimumHeight = 22f }
-            //    };
+                foreach (var item in listaDia)
+                {
+                    Table ejercicio = new Table(1);
+                    ejercicio.SetWidth(90);
 
-            //    Phrase firstLine = new Phrase("Nombre", boldFont);
-            //    headerTable.AddCell(firstLine);
-            //    headerTable.AddCell(NombreTB.Text);
+                    Table musculo = new Table(1);
+                    musculo.UseAllAvailableWidth();
 
-            //    firstLine = new Phrase("Fecha Inicio", boldFont);
-            //    headerTable.AddCell(firstLine);
-            //    headerTable.AddCell(FechaTB.Text);
+                    Cell celda = new Cell();
 
-            //    firstLine = new Phrase("Proximo Control", boldFont);
-            //    headerTable.AddCell(firstLine);
-            //    headerTable.AddCell(ControlTB.Text);
+                    musculo.AddCell(new Cell().SetBackgroundColor(ColorConstants.LIGHT_GRAY).Add(new Paragraph(item.Musculo))
+                                              .SetBorder(Border.NO_BORDER)
+                                              .SetFontSize(10).SetBold()
+                                              .SetTextAlignment(TextAlignment.LEFT));
 
-            //    firstLine = new Phrase("Nº Rutina", boldFont);
-            //    headerTable.AddCell(firstLine);
-            //    headerTable.AddCell(RutinaNumTB.Text);
+                    ejercicio.SetBorder(Border.NO_BORDER).AddCell(musculo);
 
-            //    pdfDoc.Add(headerTable);
-            //    pdfDoc.Add(spacer);
+                    Table nomEjercicio = new Table(1).SetBorder(Border.NO_BORDER);
 
+                    celda = new Cell().SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT)
+                                                                                                               .Add(new Paragraph(item.Ejercicio)
+                                                                                                                 .SetFontSize(8)).SetBorder(Border.NO_BORDER);
 
-            //    //TABLEROS EJERCICIOS
-            //    var columnWidths = new[] { 0.75f, 0.75f, 2f, 0.5f, 1f };
+                    nomEjercicio.AddCell(celda);
 
-            //    var table = new PdfPTable(columnWidths)
-            //    {
-            //        HorizontalAlignment = Left,
-            //        WidthPercentage = 100,
-            //        DefaultCell = { MinimumHeight = 22f }
-            //    };
+                    ejercicio.AddCell(nomEjercicio);
 
+                    Table datos = new Table(6).UseAllAvailableWidth();
+                    celda = new Cell().Add(new Paragraph("Dia").SetFontSize(8.5f)).SetBorder(Border.NO_BORDER);
+                    datos.AddCell(celda.AddStyle(headerMusculo));
 
-            //    //ORDER POR DIA
-            //    var listaDia = ejercicios.OrderBy(x => x.Dia).ToList();
-            //    //AGRUPAMOS PRO GRUPO PARA NO REPETIR LOS DIAS
-            //    var grouping = listaDia.GroupBy(x => x.Dia).Select(x => new { x.Key }).ToList();
-            //    int dias = grouping.Count();
+                    celda = new Cell().Add(new Paragraph(item.Dia.ToString())).SetBorder(new SolidBorder(0.5f));
+                    datos.AddCell(celda.AddStyle(styleDatos));
 
-            //    for (int i = 0; i < dias; i++)
-            //    {
+                    celda = new Cell().Add(new Paragraph("Ser")).SetBorder(Border.NO_BORDER);
+                    datos.AddCell(celda.AddStyle(headerMusculo).SetFontSize(8.5f));
 
-            //        var cell = new PdfPCell(new Phrase("Dia " + grouping[i].Key, boldFont))
-            //        {
-            //            Colspan = 5,
-            //            HorizontalAlignment = 1,  //0=Left, 1=Centre, 2=Right
-            //            MinimumHeight = 30f
-            //        };
-            //        table.AddCell(cell);
-            //        pdfDoc.Add(table);
-            //        pdfDoc.Add(spacer);
+                    celda = new Cell().Add(new Paragraph(item.Series.ToString())).SetBorder(new SolidBorder(0.5f));
+                    datos.AddCell(celda.AddStyle(styleDatos));
 
-            //        table = new PdfPTable(6)
-            //        {
-            //            HorizontalAlignment = 1,
-            //            WidthPercentage = 100,
-            //            DefaultCell = { MinimumHeight = 22f }
-            //        };
+                    celda = new Cell().Add(new Paragraph("Rep")).SetBorder(Border.NO_BORDER);
+                    datos.AddCell(celda.AddStyle(headerMusculo).SetFontSize(8.5f));
+
+                    celda = new Cell().Add(new Paragraph(item.Repeticiones.ToString())).SetBorder(new SolidBorder(0.5f));
+                    datos.AddCell(celda.AddStyle(styleDatos));
+
+                    ejercicio.AddCell(datos);
+
+                    Table foto = new Table(6).SetBorder(Border.NO_BORDER);
+                    Table descanso = new Table(1).SetBorder(Border.NO_BORDER);
+
+                    celda = new Cell().Add(new Paragraph("Descans").SetFontSize(9).SetBold()).SetBorder(Border.NO_BORDER);
+                    descanso.AddCell(celda);
+
+                    celda = new Cell().Add(new Paragraph(item.Descanso).SetTextAlignment(TextAlignment.CENTER).SetFontSize(9)).SetBorder(new SolidBorder(ColorConstants.BLACK, 0.5f));
+                    descanso.AddCell(celda);
+                    foto.AddCell(descanso);
 
 
-            //        //headers
 
-            //        var pordia = listaDia.Where(x => x.Dia == grouping[i].Key).ToList();
-            //        cell = new PdfPCell(new Phrase("Ejercicio", boldFont));
-            //        table.AddCell(cell);
-            //        cell = new PdfPCell(new Phrase("Series", boldFont));
-            //        table.AddCell(cell);
-            //        cell = new PdfPCell(new Phrase("Repeticiones", boldFont));
-            //        table.AddCell(cell);
-            //        cell = new PdfPCell(new Phrase("Descansos", boldFont));
-            //        table.AddCell(cell);
-            //        cell = new PdfPCell(new Phrase("Comentarios", boldFont));
-            //        table.AddCell(cell);
-            //        cell = new PdfPCell(new Phrase("Foto", boldFont));
-            //        table.AddCell(cell);
+                    if (string.IsNullOrWhiteSpace(item.ImagePath)){
+                        MessageBox.Show("Algun ejercicio no tiene asignada ninguna foto");
+                        return;
+                    }
+                    Image imgEjercicio = new Image(ImageDataFactory.Create(item.ImagePath));
 
-            //        foreach (var item in pordia)
-            //        {
-            //            iTextSharp.text.Image img;
-            //            try
-            //            {
-                           
+                    celda = new Cell(2, 5).Add(imgEjercicio.SetHeight(87f).SetWidth(87f)).SetBorder(Border.NO_BORDER);
+                    foto.AddCell(celda);
 
-            //                if (!item.ImagePath.Equals(""))
-            //                {
-            //                    img = iTextSharp.text.Image.GetInstance(item.ImagePath);
-            //                    img.ScaleAbsolute(19f, 19f);
-            //                }
-            //                else
-            //                    img = null;
-            //                table.AddCell(new Phrase(item.Ejercicio.ToString(), normalFont));
-            //                table.AddCell(new Phrase(item.Series.ToString(), normalFont));
-            //                table.AddCell(new Phrase(item.Repeticiones.ToString(), normalFont));
-            //                table.AddCell(new Phrase(item.Descanso, normalFont));
-            //                table.AddCell(new Phrase(item.Comentario, normalFont));
-            //                table.AddCell(img);
-            //            }
-            //            catch (Exception ex)
-            //            {
+                    ejercicio.AddCell(foto);
 
-            //            }
+                    Table otrosDatos2 = new Table(1).UseAllAvailableWidth();
 
-            //        }
-            //        pdfDoc.Add(table);
-            //        pdfDoc.Add(spacer);
+                    celda = new Cell().Add(new Paragraph("Notes").AddStyle(headerMusculo).SetFontSize(10f)).SetBorder(Border.NO_BORDER);
+                    otrosDatos2.AddCell(celda);
+                    ejercicio.AddCell(otrosDatos2);
 
 
-            //    }
-            //    pdfDoc.Close();
-            //    MessageBox.Show("Se ha generado el pdf en la ruta: " + saveFileDialog1.FileName);
-            //}
+                    Table otrosDatos3 = new Table(1).UseAllAvailableWidth();
+
+                    celda = new Cell().Add(new Paragraph(item.Comentario).AddStyle(styleDatos)).SetBorder(Border.NO_BORDER);
+                    otrosDatos3.AddCell(celda);
+                    ejercicio.AddCell(otrosDatos3);
+
+                    tablaPrincipal.AddCell(ejercicio).SetBorder(Border.NO_BORDER);
+                }
+
+
+                doc.Add(tablaPrincipal);
+
+                doc.Close();
+
+                MessageBox.Show("Se ha generado el pdf en la ruta: " + path);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error en la creacion de la rutina");
+                return;
+
+            }
+
+
 
         }
 
 
 
-        private void closeButton_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void closeButton_MouseLeave(object sender, EventArgs e)
-        {
-            closeButton.BackColor = System.Drawing.Color.Red;
-        }
         private void Ordenar()
         {
             if (flowLayoutPanel1.Controls.Count > 1)
@@ -376,12 +377,20 @@ namespace MainRoutinesProject.Screens
             CargarDatos();
         }
 
+        private static void RemoveBorder(Table table)
+        {
+            foreach(IElement iElement in table.GetChildren())
+            {
+                ((Cell)iElement).SetBorder(Border.NO_BORDER);
+            }
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
-            Style boldStyle = new Style().SetTextAlignment(TextAlignment.CENTER).SetFontSize(11).SetBold();
-            Style headerMusculo = new Style().SetTextAlignment(TextAlignment.LEFT).SetBold().SetBorder(Border.NO_BORDER);
+            Style boldStyle = new Style().SetTextAlignment(TextAlignment.CENTER).SetFontSize(6).SetBold();
+            Style headerMusculo = new Style().SetTextAlignment(TextAlignment.LEFT).SetBold();
 
-            Style styleDatos = new Style().SetBorder(Border.NO_BORDER).SetFontSize(9);
+            Style styleDatos = new Style().SetFontSize(9);
 
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "Pdf Files|*.pdf";
@@ -395,36 +404,37 @@ namespace MainRoutinesProject.Screens
 
             string path = saveFileDialog1.FileName;
 
+
             PdfWriter pw = new PdfWriter(path);
             PdfDocument pdfDocument = new PdfDocument(pw);
 
             pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler(logo));
             Document doc = new Document(pdfDocument, PageSize.LETTER);
-            doc.SetMargins(75, 15, 70, 15);
+            doc.SetMargins(65, 15, 15, 15);
 
             Table table = new Table(1).UseAllAvailableWidth(); //USAR TODO EL ANCHO DE LA HOJA
-            Cell cell = new Cell().Add(new Paragraph("Nom:").SetFontSize(10))
-                                                            .SetTextAlignment(TextAlignment.LEFT)
-                                                            .SetBorder(Border.NO_BORDER).SetBold();
 
-            table.AddCell(cell);
+            table.AddCell(new Cell().Add(new Paragraph("Nom:").SetFontSize(7))
+                                                            .SetTextAlignment(TextAlignment.LEFT)
+                                                            .SetBold().SetBorder(Border.NO_BORDER));
+
             doc.Add(table);
 
 
             Table _table = new Table(7).UseAllAvailableWidth();
-            Cell _cell = new Cell().Add(new Paragraph("Lorena Vicente")).SetFontSize(10);
+            Cell _cell = new Cell().Add(new Paragraph("Lorena Vicente")).SetFontSize(6);
             _table.AddCell(_cell);
 
             _cell = new Cell().Add(new Paragraph("Data inici rutina")).SetBorder(Border.NO_BORDER);
             _table.AddCell(_cell.AddStyle(boldStyle));
 
-            _cell = new Cell().Add(new Paragraph(FechaTB.Text)).SetFontSize(10).SetTextAlignment(TextAlignment.CENTER);
+            _cell = new Cell().Add(new Paragraph(FechaTB.Text)).SetFontSize(6).SetTextAlignment(TextAlignment.CENTER);
             _table.AddCell(_cell);
 
             _cell = new Cell().Add(new Paragraph("Data final rutina")).SetBorder(Border.NO_BORDER);
             _table.AddCell(_cell.AddStyle(boldStyle));
 
-            _cell = new Cell().Add(new Paragraph(FechaFinTB.Text)).SetFontSize(10).SetTextAlignment(TextAlignment.CENTER);
+            _cell = new Cell().Add(new Paragraph(FechaFinTB.Text)).SetFontSize(6).SetTextAlignment(TextAlignment.CENTER);
             _table.AddCell(_cell);
 
             _cell = new Cell().Add(new Paragraph("Rutina")).SetBorder(Border.NO_BORDER);
@@ -432,65 +442,71 @@ namespace MainRoutinesProject.Screens
 
             _cell = new Cell().Add(new Paragraph("003").SetTextAlignment(TextAlignment.RIGHT));
             _table.AddCell(_cell);
+            _table.SetMarginBottom(2f);
             doc.Add(_table);
 
-            Table tablaPrincipal = new Table(4).SetBorder(Border.NO_BORDER);
-            tablaPrincipal.SetHorizontalBorderSpacing(0.5f);
-            tablaPrincipal.SetVerticalBorderSpacing(0.5f);
 
-            for (int i = 0; i < 7; i++)
+            Table tablaPrincipal = new Table(4).SetBorder(new SolidBorder(ColorConstants.RED,2));
+            tablaPrincipal.SetHorizontalBorderSpacing(2f);
+            tablaPrincipal.SetVerticalBorderSpacing(0.5f);
+            var listaDia = ejercicios.OrderBy(x => x.Dia).ToList();
+
+
+            foreach (var item in listaDia)
             {
-                Table ejercicio = new Table(1).SetBorder(Border.NO_BORDER);
+                Table ejercicio = new Table(1);
                 ejercicio.SetWidth(90);
 
-
-                Table musculo = new Table(1).SetBorder(Border.NO_BORDER);
+                Table musculo = new Table(1);
                 musculo.UseAllAvailableWidth();
 
-                Cell celda = new Cell().SetBackgroundColor(ColorConstants.LIGHT_GRAY)
-                    .SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT).Add(new Paragraph("Deltoides"))
-                                                                                                                    .SetFontSize(10)
-                                                                                                                    .AddStyle(headerMusculo);
-                musculo.AddCell(celda);
-                ejercicio.AddCell(musculo);
+                Cell celda = new Cell();
 
+                musculo.AddCell(new Cell().SetBackgroundColor(ColorConstants.LIGHT_GRAY).Add(new Paragraph(item.Musculo))
+                                          .SetBorder(Border.NO_BORDER)
+                                          .SetFontSize(10).SetBold()
+                                          .SetTextAlignment(TextAlignment.LEFT));
+
+                ejercicio.SetBorder(Border.NO_BORDER).AddCell(musculo);
 
                 Table nomEjercicio = new Table(1).SetBorder(Border.NO_BORDER);
 
                 celda = new Cell().SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT)
-                                                                                                           .Add(new Paragraph("Elevacion_frontal_alterno_de_pie")
-                                                                                                           .SetFontSize(8)).SetBorder(Border.NO_BORDER);
+                                                                                                           .Add(new Paragraph(item.Ejercicio)
+                                                                                                             .SetFontSize(8)).SetBorder(Border.NO_BORDER);
+
                 nomEjercicio.AddCell(celda);
+
                 ejercicio.AddCell(nomEjercicio);
 
-                Table datos = new Table(6).UseAllAvailableWidth().SetBorder(Border.NO_BORDER);
-                celda = new Cell().Add(new Paragraph("Dia").SetFontSize(8.5f));
+                Table datos = new Table(6).UseAllAvailableWidth();
+                celda = new Cell().Add(new Paragraph("Dia").SetFontSize(8.5f)).SetBorder(Border.NO_BORDER);
                 datos.AddCell(celda.AddStyle(headerMusculo));
 
-                celda = new Cell().Add(new Paragraph("1")).SetBorder(new SolidBorder(0.5f));
+                celda = new Cell().Add(new Paragraph(item.Dia.ToString())).SetBorder(new SolidBorder(0.5f));
                 datos.AddCell(celda.AddStyle(styleDatos));
 
                 celda = new Cell().Add(new Paragraph("Ser")).SetBorder(Border.NO_BORDER);
                 datos.AddCell(celda.AddStyle(headerMusculo).SetFontSize(8.5f));
 
-                celda = new Cell().Add(new Paragraph("15")).SetBorder(new SolidBorder(0.5f));
+                celda = new Cell().Add(new Paragraph(item.Series.ToString())).SetBorder(new SolidBorder(0.5f));
                 datos.AddCell(celda.AddStyle(styleDatos));
 
                 celda = new Cell().Add(new Paragraph("Rep")).SetBorder(Border.NO_BORDER);
                 datos.AddCell(celda.AddStyle(headerMusculo).SetFontSize(8.5f));
 
-                celda = new Cell().Add(new Paragraph("10")).SetBorder(new SolidBorder(0.5f));
+                celda = new Cell().Add(new Paragraph(item.Repeticiones.ToString())).SetBorder(new SolidBorder(0.5f));
                 datos.AddCell(celda.AddStyle(styleDatos));
 
                 ejercicio.AddCell(datos);
 
-                Table foto = new Table(6).SetBorder(Border.NO_BORDER); 
+                Table foto = new Table(6).SetBorder(Border.NO_BORDER);
                 Table descanso = new Table(1).SetBorder(Border.NO_BORDER);
 
                 celda = new Cell().Add(new Paragraph("Descans").SetFontSize(9).SetBold()).SetBorder(Border.NO_BORDER);
                 descanso.AddCell(celda);
 
-                celda = new Cell().Add(new Paragraph("30S").SetFontSize(9)).SetBorder(new SolidBorder(ColorConstants.BLACK, 0.5f));
+                celda = new Cell().Add(new Paragraph(item.Descanso).SetTextAlignment(TextAlignment.CENTER).SetFontSize(9)).SetBorder(new SolidBorder(ColorConstants.BLACK, 0.5f));
                 descanso.AddCell(celda);
                 foto.AddCell(descanso);
 
@@ -508,13 +524,15 @@ namespace MainRoutinesProject.Screens
 
                 Table otrosDatos3 = new Table(1).UseAllAvailableWidth();
 
-                celda = new Cell().Add(new Paragraph("Bajada lenta").AddStyle(styleDatos)).SetBorder(Border.NO_BORDER);
+                celda = new Cell().Add(new Paragraph(item.Comentario).AddStyle(styleDatos)).SetBorder(Border.NO_BORDER);
                 otrosDatos3.AddCell(celda);
                 ejercicio.AddCell(otrosDatos3);
 
-                tablaPrincipal.AddCell(ejercicio);
-
+                tablaPrincipal.AddCell(ejercicio).SetBorder(Border.NO_BORDER);
             }
+
+
+
             doc.Add(tablaPrincipal);
 
             doc.Close();
@@ -523,6 +541,154 @@ namespace MainRoutinesProject.Screens
 
 
 
+        }
+
+        private void button4_Click_1(object sender, EventArgs e)
+        {
+            Style boldStyle = new Style().SetTextAlignment(TextAlignment.CENTER).SetFontSize(8).SetBold();
+            Style headerMusculo = new Style().SetTextAlignment(TextAlignment.LEFT).SetBold();
+
+            Style styleDatos = new Style().SetFontSize(7);
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "Pdf Files|*.pdf";
+            saveFileDialog1.Title = "Save an Image File";
+            saveFileDialog1.ShowDialog();
+
+            string Imagenpath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
+            Image imgEjercicio = new Image(ImageDataFactory.Create(Imagenpath + "\\Resources\\Ejercicios_Fotos\\Dominadas.jpg"));
+            Image logo = new Image(ImageDataFactory.Create(Imagenpath + "\\Resources\\Icons\\OnixLogo.png"));
+
+            string path = saveFileDialog1.FileName;
+
+
+            PdfWriter pw = new PdfWriter(path);
+            PdfDocument pdfDocument = new PdfDocument(pw);
+
+            pdfDocument.AddEventHandler(PdfDocumentEvent.START_PAGE, new HeaderEventHandler(logo));
+            Document doc = new Document(pdfDocument, PageSize.A4);
+            doc.SetMargins(55, 15, 15, 15);
+
+            Table table = new Table(1).UseAllAvailableWidth(); //USAR TODO EL ANCHO DE LA HOJA
+
+            table.AddCell(new Cell().Add(new Paragraph("Nom:").SetFontSize(8))
+                                                            .SetTextAlignment(TextAlignment.LEFT)
+                                                            .SetBold().SetBorder(Border.NO_BORDER));
+
+            doc.Add(table);
+
+
+            Table _table = new Table(7).UseAllAvailableWidth();
+            Cell _cell = new Cell().Add(new Paragraph("Lorena Vicente").AddStyle(styleDatos)).SetMaxHeight(20f).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            _table.AddCell(_cell);
+
+            _cell = new Cell().Add(new Paragraph("Data inici rutina")).SetBorder(Border.NO_BORDER).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            _table.AddCell(_cell.AddStyle(boldStyle));
+
+            _cell = new Cell().Add(new Paragraph(FechaTB.Text)).AddStyle(styleDatos).SetTextAlignment(TextAlignment.CENTER).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            _table.AddCell(_cell);
+
+            _cell = new Cell().Add(new Paragraph("Data final rutina")).SetBorder(Border.NO_BORDER).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            _table.AddCell(_cell.AddStyle(boldStyle));
+
+            _cell = new Cell().Add(new Paragraph(FechaFinTB.Text)).AddStyle(styleDatos).SetTextAlignment(TextAlignment.CENTER).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            _table.AddCell(_cell);
+
+            _cell = new Cell().Add(new Paragraph("Rutina")).SetBorder(Border.NO_BORDER).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            _table.AddCell(_cell.AddStyle(boldStyle));
+
+            _cell = new Cell().Add(new Paragraph("003").AddStyle(styleDatos).SetTextAlignment(TextAlignment.RIGHT)).SetVerticalAlignment(VerticalAlignment.MIDDLE);
+            _table.AddCell(_cell);
+            doc.Add(_table);
+
+
+            Table tablaPrincipal = new Table(4);
+            tablaPrincipal.SetHorizontalBorderSpacing(0);
+            tablaPrincipal.SetVerticalBorderSpacing(0);
+            var listaDia = ejercicios.OrderBy(x => x.Dia).ToList();
+
+
+            for (int i = 0; i < 20; i++)
+            {
+                Table ejercicio = new Table(1);
+                ejercicio.SetWidth(100);
+
+                Table musculo = new Table(1);
+                musculo.UseAllAvailableWidth();
+
+                Cell celda = new Cell();
+                musculo.AddCell(new Cell().SetBackgroundColor(ColorConstants.LIGHT_GRAY).Add(new Paragraph("DELTOIDES"))
+                                          .SetBorder(Border.NO_BORDER)
+                                          .SetFontSize(7).SetBold()
+                                          .SetTextAlignment(TextAlignment.LEFT));
+
+                ejercicio.SetBorder(Border.NO_BORDER).AddCell(musculo);
+
+                Table nomEjercicio = new Table(1).SetBorder(Border.NO_BORDER);
+
+                celda = new Cell().SetHorizontalAlignment(iText.Layout.Properties.HorizontalAlignment.LEFT)
+                                                                                                .Add(new Paragraph("Sentadilla_bulgara_con_mancuernas")
+                                                                                                    .SetFontSize(7)).SetBorder(Border.NO_BORDER);
+
+                nomEjercicio.AddCell(celda);
+
+                ejercicio.AddCell(nomEjercicio);
+
+                Table datos = new Table(6).UseAllAvailableWidth();
+                celda = new Cell().Add(new Paragraph("Dia").SetFontSize(7f)).SetBorder(Border.NO_BORDER);
+                datos.AddCell(celda.AddStyle(headerMusculo));
+
+                celda = new Cell().Add(new Paragraph("A")).SetBorder(new SolidBorder(0.5f));
+                datos.AddCell(celda.AddStyle(styleDatos));
+
+                celda = new Cell().Add(new Paragraph("Ser")).SetBorder(Border.NO_BORDER);
+                datos.AddCell(celda.AddStyle(headerMusculo).SetFontSize(7f));
+
+                celda = new Cell().Add(new Paragraph("2")).SetBorder(new SolidBorder(0.5f));
+                datos.AddCell(celda.AddStyle(styleDatos));
+
+                celda = new Cell().Add(new Paragraph("Rep")).SetBorder(Border.NO_BORDER);
+                datos.AddCell(celda.AddStyle(headerMusculo).SetFontSize(7f));
+
+                celda = new Cell().Add(new Paragraph("3")).SetBorder(new SolidBorder(0.5f));
+                datos.AddCell(celda.AddStyle(styleDatos));
+
+                ejercicio.AddCell(datos);
+
+                Table foto = new Table(6).SetBorder(Border.NO_BORDER);
+                Table descanso = new Table(1).SetBorder(Border.NO_BORDER);
+
+                celda = new Cell().Add(new Paragraph("Descans").SetFontSize(8).SetBold()).SetBorder(Border.NO_BORDER);
+                descanso.AddCell(celda);
+
+                celda = new Cell().Add(new Paragraph("30s").AddStyle(styleDatos).SetTextAlignment(TextAlignment.LEFT)).SetBorder(new SolidBorder(ColorConstants.BLACK, 0.5f));
+                descanso.AddCell(celda);
+                foto.AddCell(descanso);
+
+                celda = new Cell(2, 5).Add(imgEjercicio.SetHeight(70f).SetWidth(77f)).SetBorder(Border.NO_BORDER);
+                foto.AddCell(celda);
+
+                ejercicio.AddCell(foto);
+
+                Table otrosDatos2 = new Table(1).UseAllAvailableWidth();
+
+                celda = new Cell().Add(new Paragraph("Notes").AddStyle(headerMusculo).SetFontSize(7f)).SetBorder(Border.NO_BORDER);
+                otrosDatos2.AddCell(celda);
+
+                celda = new Cell().Add(new Paragraph("Baja lento contrae arriba").AddStyle(headerMusculo).SetFontSize(7f)).SetBorder(new SolidBorder(ColorConstants.BLUE,0.5f));
+                otrosDatos2.AddCell(celda);
+                ejercicio.AddCell(otrosDatos2);
+
+                tablaPrincipal.AddCell(ejercicio.SetBorder(Border.NO_BORDER)).SetBorder(Border.NO_BORDER);
+               
+            }
+
+
+
+            doc.Add(tablaPrincipal);
+
+            doc.Close();
         }
     }
 }

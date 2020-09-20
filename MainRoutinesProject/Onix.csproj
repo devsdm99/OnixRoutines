@@ -7,8 +7,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{33D4677B-B5E8-4C4E-9B41-FC936BCF429A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>MainRoutinesProject</RootNamespace>
-    <AssemblyName>MainRoutinesProject</AssemblyName>
+    <RootNamespace>Onix</RootNamespace>
+    <AssemblyName>Onix</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -37,7 +37,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\xexid\Desktop\Programaso\</OutputPath>
+    <OutputPath>C:\Users\xexid\Desktop\Programaso\Build\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -66,6 +66,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>OnixLogo.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
@@ -154,22 +157,64 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Manteniments\EjerciciosMantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Manteniments\EjerciciosMantenimiento.Designer.cs">
+      <DependentUpon>EjerciciosMantenimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Manteniments\MusculosMantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Manteniments\MusculosMantenimiento.Designer.cs">
+      <DependentUpon>MusculosMantenimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Mantenimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Mantenimientos.Designer.cs">
+      <DependentUpon>Mantenimientos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\NuevaRutinaScreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Screens\NuevaRutinaScreen.Designer.cs">
       <DependentUpon>NuevaRutinaScreen.cs</DependentUpon>
     </Compile>
+    <Content Include="OnixLogo.ico" />
+    <None Include="Resources\Icons\notas.png" />
+    <None Include="Resources\Icons\testimonial.png" />
+    <None Include="Resources\Icons\musculo.png" />
+    <None Include="Resources\Icons\barra-con-pesas.png" />
+    <None Include="Resources\Icons\llave.png" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <EmbeddedResource Include="Screens\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Manteniments\EjerciciosMantenimiento.resx">
+      <DependentUpon>EjerciciosMantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Manteniments\MusculosMantenimiento.resx">
+      <DependentUpon>MusculosMantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Mantenimientos.resx">
+      <DependentUpon>Mantenimientos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Screens\NuevaRutinaScreen.resx">
       <DependentUpon>NuevaRutinaScreen.cs</DependentUpon>
     </EmbeddedResource>
@@ -202,16 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Icons\OnixLogo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Icons\help.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Icons\calendar.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

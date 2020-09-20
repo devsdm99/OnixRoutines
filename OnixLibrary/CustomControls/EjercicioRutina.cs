@@ -23,7 +23,7 @@ namespace OnixLibrary.CustomControls
         private List<Ejercicio> _ejerciciosList = new List<Ejercicio>();
         private int _IdgrupoSeleccionado;
         private int _IdejercicioSeleccionado;
-        private int _dia;
+        private string _dia;
         private int _series;
         private int _reps;
         private List<Descanso> _descansosList = new List<Descanso>();
@@ -36,8 +36,6 @@ namespace OnixLibrary.CustomControls
             get { return _pendienteEliminar; }
             set { _pendienteEliminar = value; }
         }
-
-
 
 
         public List<GrupoMuscular> GruposMusculares {
@@ -58,6 +56,15 @@ namespace OnixLibrary.CustomControls
             set { _ejercicioSeleccionado = value; }
         }
 
+        private string _musculoSeleccionado;
+
+        public string Musculo
+        {
+            get { return _musculoSeleccionado; }
+            set { _musculoSeleccionado = value; }
+        }
+
+
 
         public int IdGrupoSeleccionado
         {
@@ -65,7 +72,6 @@ namespace OnixLibrary.CustomControls
             set {
                 _IdgrupoSeleccionado = value;
                 InvokePropertyChanged(new PropertyChangedEventArgs("IdGrupoSeleccionado"));
-
             }
         }
 
@@ -80,7 +86,7 @@ namespace OnixLibrary.CustomControls
             }
         }
 
-        public int Dia
+        public string Dia
         {
             get { return _dia; }
             set {   
@@ -219,7 +225,7 @@ namespace OnixLibrary.CustomControls
         private void EjercicioRutina_Load(object sender, EventArgs e)
         {
             GruposMusculares = OnixConnection.GetAllGruposMusculares();
-
+            Musculo = GruposMusculares.FirstOrDefault().Nombre;
             foreach (var item in GruposMusculares)
             {
                 grupoCombo.Items.Add(item.Nombre); //AÑADIMOS LOS VALORES AL COMBO
@@ -259,6 +265,7 @@ namespace OnixLibrary.CustomControls
         {
             ejercicoCombo.Items.Clear();
             ejercicoCombo.Text = "";
+            Musculo = GruposMusculares[grupoCombo.SelectedIndex].Nombre;
             int idGrupo = GruposMusculares[grupoCombo.SelectedIndex].IdGrupoMuscular;
 
             _ejerciciosList = OnixConnection.GetExercicesByGroupId(idGrupo);
