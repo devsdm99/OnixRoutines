@@ -1,6 +1,6 @@
 ﻿namespace Onix.Screens.Manteniments
 {
-    partial class MusculosMantenimiento
+    partial class ComentariosMantenimiento
     {
         /// <summary>
         /// Required designer variable.
@@ -81,10 +81,10 @@
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Font = new System.Drawing.Font("MV Boli", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(1097, 42);
+            this.textBox1.Location = new System.Drawing.Point(908, 42);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(239, 43);
+            this.textBox1.Size = new System.Drawing.Size(428, 43);
             this.textBox1.TabIndex = 5;
             // 
             // label1
@@ -92,11 +92,11 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("MV Boli", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(742, 47);
+            this.label1.Location = new System.Drawing.Point(699, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(319, 31);
+            this.label1.Size = new System.Drawing.Size(161, 31);
             this.label1.TabIndex = 6;
-            this.label1.Text = "Nombre Grupo Muscular:";
+            this.label1.Text = "Comentario:";
             // 
             // dataGridView1
             // 
@@ -115,8 +115,9 @@
             this.dataGridView1.Size = new System.Drawing.Size(647, 763);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dataGridView1.CellEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEnter);
             // 
-            // MusculosMantenimiento
+            // ComentariosMantenimiento
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -128,8 +129,8 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "MusculosMantenimiento";
-            this.Text = "MusculosMantenimiento";
+            this.Name = "ComentariosMantenimiento";
+            this.Text = "ComentariosMantenimiento";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MusculosMantenimiento_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

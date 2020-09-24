@@ -32,9 +32,8 @@ namespace Onix.Screens.Manteniments
 
         private void EjerciciosMantenimiento_Load(object sender, EventArgs e)
         {
-            var grupos = OnixConnection.GetAllGruposMusculares();
-            var lista = new BindingSource(grupos,null);
-            dataGridView1.DataSource = lista;
+            FillDataGridView();
+
 
             GruposMusculares = OnixConnection.GetAllGruposMusculares();
 
@@ -43,47 +42,70 @@ namespace Onix.Screens.Manteniments
                 itemsCombo1.Items.Add(item.Nombre);
             }
 
+            itemsCombo1.SelectedIndex = 0;
+
         }
+
+
 
         private void FillDataGridView()
         {
-            var grupos = OnixConnection.GetAllGruposMusculares();
-            var lista = new BindingSource(grupos, null);
+            var ejercicios = OnixConnection.GetAllEjercicios();
+            var lista = new BindingSource(ejercicios, null);
             dataGridView1.DataSource = lista;
+
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void InsertButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
+            try
             {
-                OnixConnection.InsertaEjercicio(new Ejercicio()
+                if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
                 {
-                   Nombre = textBox1.Text
+                    OnixConnection.InsertaEjercicio(new Ejercicio()
+                    {
+                        IdEjercicio = Id,
+                        Nombre = textBox1.Text,
+                        IdGrupoMuscular = IdMusculo
+                    });
+                    itemsCombo1.SelectedIndex = 0;
+                    textBox1.Text = "";
+                    FillDataGridView();
+                }
+                else
+                {
+                    MessageBox.Show("Inserta un nombre de ejercicio");
+                }
 
-                });
+            }catch(Exception ex)
+            {
+                MessageBox.Show("No se pudo insertar el ejercicio");
             }
-
-            FillDataGridView();
         }
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-            textBox1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+            GetDatos();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             try
             {
-                OnixConnection.DeleteEjercicio(new Ejercicio()
+                if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    IdEjercicio = Id,
-                    Nombre = textBox1.Text
-                });
-
-                FillDataGridView();
-
+                    OnixConnection.DeleteEjercicio(new Ejercicio()
+                    {
+                        IdEjercicio = Id,
+                        Nombre = textBox1.Text,
+                        IdGrupoMuscular = IdMusculo
+                    });
+                    textBox1.Text = "";
+                    FillDataGridView();
+                }
+                else {
+                    MessageBox.Show("Deber seleccionar alguna fila de la tabla.");
+                }
             }catch(Exception ex)
             {
                 MessageBox.Show("No se ha podido eliminar el ejercicio");
@@ -93,6 +115,23 @@ namespace Onix.Screens.Manteniments
         private void itemsCombo1_SelectedIndexChanged(object sender, EventArgs e)
         {
             IdMusculo = GruposMusculares[itemsCombo1.SelectedIndex].IdGrupoMuscular;
+        }
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            GetDatos();
+        }
+        private void GetDatos()
+        {
+            try
+            {
+                Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+                textBox1.Text = dataGridView1.SelectedRows[0].Cells[2].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

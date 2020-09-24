@@ -40,6 +40,7 @@ namespace OnixLibrary
                 return output.ToList();
             }
         }
+
         public static List<GrupoMuscular> GetAllGruposMusculares()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -49,6 +50,7 @@ namespace OnixLibrary
             }
         }
 
+
         public static List<Ejercicio> GetExercicesByGroupId(int idGrupo)
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -57,6 +59,7 @@ namespace OnixLibrary
                 return output.ToList();
             }
         }
+
         public static List<Ejercicio> GetAllEjercicios()
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
@@ -84,6 +87,23 @@ namespace OnixLibrary
                 cnn.Execute("insert into GruposMusculares (Nombre) values (@Nombre)", ej);
             }
         }
+
+        public static void InsertarComentario(Comentario ej)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Comentarios (TipoComentario) values (@TipoComentario)", ej);
+            }
+        }
+        public static void InsetarDescanso(Descanso ej)
+        {
+
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("insert into Descansos (TiempoDescanso) values (@TiempoDescanso)", ej);
+            }
+        }
+
         #endregion
 
 
@@ -101,12 +121,27 @@ namespace OnixLibrary
         {
             using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
             {
-                cnn.Execute("delete from Ejercicios where IdEjercicio = (@IdEjercicio) And Nombre = (@Nombre) And IdGrupoMuscular = (@IdGrupoMuscular)", ej);
+                cnn.Execute("delete from Ejercicios where IdEjercicio = (@IdEjercicio)", ej);
             }
         }
 
-        #endregion
 
+        public static void DeleteComentario(Comentario ej)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from Comentarios where IdComentario = (@IdComentario) And TipoComentario = (@TipoComentario)", ej);
+            }
+        }
+
+        public static void DeleteDescanso(Descanso ej)
+        {
+            using (IDbConnection cnn = new SQLiteConnection(LoadConnectionString()))
+            {
+                cnn.Execute("delete from Descansos where IdDescanso = (@IdDescanso) And TiempoDescanso = (@TiempoDescanso)", ej);
+            }
+        }
+        #endregion
 
 
         #region Updates

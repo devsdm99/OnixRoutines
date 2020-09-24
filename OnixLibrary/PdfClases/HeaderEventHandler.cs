@@ -44,15 +44,15 @@ namespace OnixLibrary.PdfClases
 
             Table tableEvent = new Table(UnitValue.CreatePercentArray(cellWidth)).UseAllAvailableWidth().SetBorder(Border.NO_BORDER);
 
-            Cell cell = new Cell().Add(Img.SetAutoScale(true)).AddStyle(styleCell).SetBackgroundColor(ColorConstants.GREEN);
+            Cell cell = new Cell().Add(Img.SetAutoScale(true)).AddStyle(styleCell);
             tableEvent.AddCell(cell).SetTextAlignment(TextAlignment.RIGHT);
 
-            cell = new Cell().Add(new Paragraph("CENTRE TERAPÈUTIC ONIX").AddStyle(styleText)).AddStyle(styleCell).SetBackgroundColor(ColorConstants.RED);
+            cell = new Cell().Add(new Paragraph("CENTRE TERAPÈUTIC ONIX").AddStyle(styleText)).AddStyle(styleCell);
             tableEvent.AddCell(cell);
 
             cell = new Cell()
                 .Add(new Paragraph("Tel.: 931 058 931\n"))
-                .Add(new Paragraph("Mail: centerapeutic.onix @gmail.com")).AddStyle(styleDatos).AddStyle(styleCell).SetBackgroundColor(ColorConstants.BLUE);
+                .Add(new Paragraph("Mail: centerapeutic.onix @gmail.com")).AddStyle(styleDatos).AddStyle(styleCell);
             tableEvent.AddCell(cell);
 
 

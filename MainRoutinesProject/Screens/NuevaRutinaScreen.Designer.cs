@@ -35,14 +35,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.RutinaNumTB = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.FechaFinTB = new System.Windows.Forms.DateTimePicker();
             this.FechaTB = new System.Windows.Forms.DateTimePicker();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.eliminarbutton = new System.Windows.Forms.Button();
             this.ordenarbutton = new System.Windows.Forms.Button();
             this.finalizarButton = new System.Windows.Forms.Button();
             this.añadirButton = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -51,11 +52,11 @@
             // 
             this.NombreLabel.AutoSize = true;
             this.NombreLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.NombreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NombreLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NombreLabel.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.NombreLabel.Location = new System.Drawing.Point(44, 39);
             this.NombreLabel.Name = "NombreLabel";
-            this.NombreLabel.Size = new System.Drawing.Size(219, 31);
+            this.NombreLabel.Size = new System.Drawing.Size(177, 25);
             this.NombreLabel.TabIndex = 2;
             this.NombreLabel.Text = "Nombre cliente:";
             // 
@@ -65,7 +66,7 @@
             this.NombreTB.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.NombreTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NombreTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NombreTB.Location = new System.Drawing.Point(269, 39);
+            this.NombreTB.Location = new System.Drawing.Point(227, 39);
             this.NombreTB.Multiline = true;
             this.NombreTB.Name = "NombreTB";
             this.NombreTB.Size = new System.Drawing.Size(152, 31);
@@ -75,11 +76,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label1.Location = new System.Drawing.Point(447, 39);
+            this.label1.Location = new System.Drawing.Point(403, 42);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(182, 31);
+            this.label1.Size = new System.Drawing.Size(147, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Fecha Inicio:";
             // 
@@ -88,11 +89,11 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label2.AutoSize = true;
             this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label2.Location = new System.Drawing.Point(1053, 39);
+            this.label2.Location = new System.Drawing.Point(1087, 45);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(215, 31);
+            this.label2.Size = new System.Drawing.Size(174, 25);
             this.label2.TabIndex = 6;
             this.label2.Text = "Proxim Control:";
             // 
@@ -101,11 +102,11 @@
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.label3.Location = new System.Drawing.Point(1513, 39);
+            this.label3.Location = new System.Drawing.Point(1543, 47);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(148, 31);
+            this.label3.Size = new System.Drawing.Size(119, 25);
             this.label3.TabIndex = 7;
             this.label3.Text = "Nº Rutina:";
             // 
@@ -114,7 +115,7 @@
             this.RutinaNumTB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RutinaNumTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RutinaNumTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RutinaNumTB.Location = new System.Drawing.Point(1679, 39);
+            this.RutinaNumTB.Location = new System.Drawing.Point(1679, 45);
             this.RutinaNumTB.Multiline = true;
             this.RutinaNumTB.Name = "RutinaNumTB";
             this.RutinaNumTB.Size = new System.Drawing.Size(77, 31);
@@ -122,6 +123,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.FechaFinTB);
             this.panel1.Controls.Add(this.FechaTB);
             this.panel1.Controls.Add(this.NombreLabel);
@@ -136,26 +138,37 @@
             this.panel1.Size = new System.Drawing.Size(1880, 110);
             this.panel1.TabIndex = 2;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(771, 41);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "TEST";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
             // FechaFinTB
             // 
             this.FechaFinTB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FechaFinTB.CalendarForeColor = System.Drawing.Color.Coral;
             this.FechaFinTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FechaFinTB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.FechaFinTB.Location = new System.Drawing.Point(1290, 44);
+            this.FechaFinTB.Location = new System.Drawing.Point(1286, 45);
             this.FechaFinTB.Name = "FechaFinTB";
             this.FechaFinTB.Size = new System.Drawing.Size(194, 26);
-            this.FechaFinTB.TabIndex = 9;
+            this.FechaFinTB.TabIndex = 3;
             // 
             // FechaTB
             // 
             this.FechaTB.CalendarForeColor = System.Drawing.Color.Coral;
             this.FechaTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FechaTB.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.FechaTB.Location = new System.Drawing.Point(635, 44);
+            this.FechaTB.Location = new System.Drawing.Point(556, 41);
             this.FechaTB.Name = "FechaTB";
             this.FechaTB.Size = new System.Drawing.Size(196, 26);
-            this.FechaTB.TabIndex = 8;
+            this.FechaTB.TabIndex = 2;
             // 
             // panel2
             // 
@@ -169,17 +182,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1880, 225);
             this.panel2.TabIndex = 11;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 110);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1880, 725);
-            this.flowLayoutPanel1.TabIndex = 12;
             // 
             // eliminarbutton
             // 
@@ -265,6 +267,17 @@
             this.añadirButton.UseVisualStyleBackColor = true;
             this.añadirButton.Click += new System.EventHandler(this.newRutina_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 110);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1880, 725);
+            this.flowLayoutPanel1.TabIndex = 12;
+            // 
             // NuevaRutinaScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,5 +316,6 @@
         private System.Windows.Forms.Button eliminarbutton;
         private System.Windows.Forms.DateTimePicker FechaTB;
         private System.Windows.Forms.DateTimePicker FechaFinTB;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -18,7 +18,7 @@ namespace Onix.Screens
             InitializeComponent();
         }
 
-        private void añadirButton_Click(object sender, EventArgs e)
+        private void MusculosMant_Click(object sender, EventArgs e)
         {
             panel1.Controls.Clear();
             MusculosMantenimiento man = new MusculosMantenimiento()
@@ -28,6 +28,45 @@ namespace Onix.Screens
             };
 
             panel1.Controls.Add(man); 
+            man.Show();
+        }
+
+        private void EjerciciosMant_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            EjerciciosMantenimiento man = new EjerciciosMantenimiento()
+            {
+                TopLevel = false,
+                AutoScroll = false
+            };
+
+            panel1.Controls.Add(man);
+            man.Show();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            ComentariosMantenimiento man = new ComentariosMantenimiento()
+            {
+                TopLevel = false,
+                AutoScroll = false
+            };
+
+            panel1.Controls.Add(man);
+            man.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            panel1.Controls.Clear();
+            DescansosMantenimiento man = new DescansosMantenimiento()
+            {
+                TopLevel = false,
+                AutoScroll = false
+            };
+
+            panel1.Controls.Add(man);
             man.Show();
         }
     }

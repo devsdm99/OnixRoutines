@@ -37,7 +37,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>C:\Users\xexid\Desktop\Programaso\Build\</OutputPath>
+    <OutputPath>C:\Users\xexid\Desktop\Onix\Build\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -116,6 +116,14 @@
     <Reference Include="itext.svg, Version=7.1.12.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext7.7.1.12\lib\net40\itext.svg.dll</HintPath>
     </Reference>
+    <Reference Include="OnixLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\xexid\Desktop\Onix\Library\OnixLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="OnixModels, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\xexid\Desktop\Onix\Library\OnixModels.dll</HintPath>
+    </Reference>
     <Reference Include="Spire.License, Version=1.3.8.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
       <HintPath>..\packages\Spire.PDF.6.9.0\lib\net40\Spire.License.dll</HintPath>
     </Reference>
@@ -168,11 +176,23 @@
     <Compile Include="Screens\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Screens\Manteniments\DescansosMantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Manteniments\DescansosMantenimiento.Designer.cs">
+      <DependentUpon>DescansosMantenimiento.cs</DependentUpon>
+    </Compile>
     <Compile Include="Screens\Manteniments\EjerciciosMantenimiento.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Screens\Manteniments\EjerciciosMantenimiento.Designer.cs">
       <DependentUpon>EjerciciosMantenimiento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\Manteniments\ComentariosMantenimiento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Screens\Manteniments\ComentariosMantenimiento.Designer.cs">
+      <DependentUpon>ComentariosMantenimiento.cs</DependentUpon>
     </Compile>
     <Compile Include="Screens\Manteniments\MusculosMantenimiento.cs">
       <SubType>Form</SubType>
@@ -206,8 +226,14 @@
     <EmbeddedResource Include="Screens\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Manteniments\DescansosMantenimiento.resx">
+      <DependentUpon>DescansosMantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Screens\Manteniments\EjerciciosMantenimiento.resx">
       <DependentUpon>EjerciciosMantenimiento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Screens\Manteniments\ComentariosMantenimiento.resx">
+      <DependentUpon>ComentariosMantenimiento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Screens\Manteniments\MusculosMantenimiento.resx">
       <DependentUpon>MusculosMantenimiento.cs</DependentUpon>
@@ -249,16 +275,6 @@
     <None Include="Resources\Icons\OnixLogo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\OnixLibrary\OnixLibrary.csproj">
-      <Project>{8043f194-43d5-4763-b811-e7aa8b1b0167}</Project>
-      <Name>OnixLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\OnixModels\OnixModels.csproj">
-      <Project>{d45ebd59-3333-477a-ad89-549db6d5cc61}</Project>
-      <Name>OnixModels</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Ejercicios_Fotos\Dominadas agarre en V.jpg">

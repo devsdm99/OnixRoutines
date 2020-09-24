@@ -70,7 +70,7 @@
             this.diaTB.Location = new System.Drawing.Point(58, 93);
             this.diaTB.Name = "diaTB";
             this.diaTB.Size = new System.Drawing.Size(76, 26);
-            this.diaTB.TabIndex = 1;
+            this.diaTB.TabIndex = 3;
             // 
             // SerTB
             // 
@@ -78,7 +78,7 @@
             this.SerTB.Location = new System.Drawing.Point(57, 125);
             this.SerTB.Name = "SerTB";
             this.SerTB.Size = new System.Drawing.Size(77, 26);
-            this.SerTB.TabIndex = 3;
+            this.SerTB.TabIndex = 4;
             // 
             // SerieLabel
             // 
@@ -143,7 +143,7 @@
             this.descansoCombo.Location = new System.Drawing.Point(108, 358);
             this.descansoCombo.Name = "descansoCombo";
             this.descansoCombo.Size = new System.Drawing.Size(178, 26);
-            this.descansoCombo.TabIndex = 11;
+            this.descansoCombo.TabIndex = 6;
             this.descansoCombo.SelectedIndexChanged += new System.EventHandler(this.descansoCombo_SelectedIndexChanged);
             // 
             // notasCombo
@@ -157,7 +157,7 @@
             this.notasCombo.Location = new System.Drawing.Point(19, 423);
             this.notasCombo.Name = "notasCombo";
             this.notasCombo.Size = new System.Drawing.Size(267, 26);
-            this.notasCombo.TabIndex = 12;
+            this.notasCombo.TabIndex = 7;
             this.notasCombo.SelectedIndexChanged += new System.EventHandler(this.notasCombo_SelectedIndexChanged);
             // 
             // label3
@@ -201,7 +201,7 @@
             this.ejercicoCombo.Location = new System.Drawing.Point(19, 58);
             this.ejercicoCombo.Name = "ejercicoCombo";
             this.ejercicoCombo.Size = new System.Drawing.Size(267, 26);
-            this.ejercicoCombo.TabIndex = 15;
+            this.ejercicoCombo.TabIndex = 2;
             this.ejercicoCombo.Texto = null;
             this.ejercicoCombo.SelectedIndexChanged += new System.EventHandler(this.ejercicoCombo_SelectedIndexChanged);
             // 
@@ -217,7 +217,7 @@
             this.grupoCombo.Location = new System.Drawing.Point(160, 21);
             this.grupoCombo.Name = "grupoCombo";
             this.grupoCombo.Size = new System.Drawing.Size(126, 26);
-            this.grupoCombo.TabIndex = 14;
+            this.grupoCombo.TabIndex = 1;
             this.grupoCombo.Texto = null;
             this.grupoCombo.SelectedIndexChanged += new System.EventHandler(this.grupoCombo_SelectedIndexChanged);
             // 

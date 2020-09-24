@@ -43,8 +43,8 @@
             this.flowLayoutPanel1.BackColor = System.Drawing.Color.Coral;
             this.flowLayoutPanel1.Controls.Add(this.añadirButton);
             this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.button3);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(1155, 0);
@@ -80,7 +80,7 @@
             this.añadirButton.Text = "MUSCULOS";
             this.añadirButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.añadirButton.UseVisualStyleBackColor = true;
-            this.añadirButton.Click += new System.EventHandler(this.añadirButton_Click);
+            this.añadirButton.Click += new System.EventHandler(this.MusculosMant_Click);
             // 
             // button1
             // 
@@ -101,6 +101,7 @@
             this.button1.Text = "EJERCICIOS";
             this.button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.EjerciciosMant_Click);
             // 
             // button2
             // 
@@ -113,7 +114,7 @@
             this.button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button2.Image = global::Onix.Properties.Resources.testimonial;
             this.button2.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button2.Location = new System.Drawing.Point(3, 381);
+            this.button2.Location = new System.Drawing.Point(3, 570);
             this.button2.Name = "button2";
             this.button2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.button2.Size = new System.Drawing.Size(254, 183);
@@ -121,6 +122,7 @@
             this.button2.Text = "COMENTARIOS";
             this.button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
@@ -133,14 +135,15 @@
             this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.button3.Image = global::Onix.Properties.Resources.notas;
             this.button3.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.button3.Location = new System.Drawing.Point(3, 570);
+            this.button3.Location = new System.Drawing.Point(3, 381);
             this.button3.Name = "button3";
             this.button3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.button3.Size = new System.Drawing.Size(254, 183);
             this.button3.TabIndex = 10;
-            this.button3.Text = "NOTAS";
+            this.button3.Text = "DESCANSOS";
             this.button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Mantenimientos
             // 

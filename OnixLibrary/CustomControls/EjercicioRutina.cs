@@ -25,7 +25,7 @@ namespace OnixLibrary.CustomControls
         private int _IdejercicioSeleccionado;
         private string _dia;
         private int _series;
-        private int _reps;
+        private string _reps;
         private List<Descanso> _descansosList = new List<Descanso>();
         private List<Comentario> _comentariosList = new List<Comentario>();
         private bool _pendienteEliminar;
@@ -105,7 +105,7 @@ namespace OnixLibrary.CustomControls
             }
         }
 
-        public int Repeticiones
+        public string Repeticiones
         {
             get { return _reps; }
             set { 
@@ -185,8 +185,8 @@ namespace OnixLibrary.CustomControls
         {
             base.OnLoad(e);
             BindGruposMusuclaesList();
-            BindDescansos();
-            BindComentarios();
+            //BindDescansos();
+            //BindComentarios();
             ImagePath = "";
 
             diaTB.DataBindings.Add("Text", this, "Dia");
@@ -244,7 +244,7 @@ namespace OnixLibrary.CustomControls
                 descansoCombo.Items.Add(item.TiempoDescanso);
             }
             IdDescanso = Descansos[0].IdDescanso;
-            Descanso = Descansos.Select(x => x.TiempoDescanso).FirstOrDefault();
+           // Descanso = Descansos.Select(x => x.TiempoDescanso).FirstOrDefault();
 
         }
 
@@ -256,8 +256,8 @@ namespace OnixLibrary.CustomControls
             {
                 notasCombo.Items.Add(item.TipoComentario);
             }
-            IdComentario = Comentarios[0].idComentario;
-            Comentario = Comentarios.Select(x => x.TipoComentario).FirstOrDefault();
+            IdComentario = Comentarios[0].IdComentario;
+            //Comentario = Comentarios.Select(x => x.TipoComentario).FirstOrDefault();
 
         }
 
@@ -279,7 +279,7 @@ namespace OnixLibrary.CustomControls
                 }
                 IdGrupoSeleccionado = GruposMusculares[grupoCombo.SelectedIndex].IdGrupoMuscular;
                 Ejercicio = Ejercicios.Select(x => x.Nombre).FirstOrDefault();
-                ejercicoCombo.SelectedIndex = 0;
+                //ejercicoCombo.SelectedIndex = 0;
             }
 
 
@@ -290,7 +290,7 @@ namespace OnixLibrary.CustomControls
         {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), @"Resources\Ejercicios_Fotos");
 
-            foreach (string file in Directory.GetFiles(path, "*.jpg"))
+            foreach (string file in Directory.GetFiles(path, "*.*", SearchOption.AllDirectories).Where(s => s.EndsWith(".jpg") || s.EndsWith(".JPG")))
             {
                 string[] elements = file.Split('\\');
                 string nameEjercicio = elements[elements.Length-1];
@@ -320,7 +320,7 @@ namespace OnixLibrary.CustomControls
 
         private void notasCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IdComentario = Comentarios[notasCombo.SelectedIndex].idComentario;
+            IdComentario = Comentarios[notasCombo.SelectedIndex].IdComentario;
             Comentario = Comentarios[notasCombo.SelectedIndex].TipoComentario;
 
         }

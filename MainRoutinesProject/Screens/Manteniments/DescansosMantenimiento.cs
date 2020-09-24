@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace Onix.Screens.Manteniments
 {
-    public partial class MusculosMantenimiento : Form
+    public partial class DescansosMantenimiento : Form
     {
-        public MusculosMantenimiento()
+        public DescansosMantenimiento()
         {
             InitializeComponent();
         }
@@ -23,16 +23,13 @@ namespace Onix.Screens.Manteniments
         private void MusculosMantenimiento_Load(object sender, EventArgs e)
         {
             FillDataGridView();
-
         }
 
         private void FillDataGridView()
         {
-            var grupos = OnixConnection.GetAllGruposMusculares();
+            var grupos = OnixConnection.GetAllDescanansos();
             var lista = new BindingSource(grupos, null);
             dataGridView1.DataSource = lista;
-            dataGridView1.Rows[0].Selected = true;
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -41,40 +38,28 @@ namespace Onix.Screens.Manteniments
             {
                 if (!string.IsNullOrEmpty(textBox1.Text.Trim()))
                 {
-                    OnixConnection.InsertarGrupoMuscular(new GrupoMuscular()
+                    OnixConnection.InsetarDescanso(new Descanso()
                     {
-                        Nombre = textBox1.Text
+                        TiempoDescanso = textBox1.Text,
                     });
                     FillDataGridView();
                     textBox1.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show("Debes rellenar los campos de texto");
+                    MessageBox.Show("Ingresa un desanso en el campo de texto.");
                 }
             }
             catch (Exception)
             {
 
-                MessageBox.Show("No se pudo insertar el musculo");
+                MessageBox.Show("No se pudo insertar el descanso");
 
             }
 
 
         }
 
-        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
-                textBox1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
-            }
-            catch (Exception)
-            {
-
-            }
-        }
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -82,25 +67,50 @@ namespace Onix.Screens.Manteniments
             {
                 if (dataGridView1.SelectedRows.Count > 0)
                 {
-                    OnixConnection.DeleteGrupoMuscular(new GrupoMuscular()
+                    OnixConnection.DeleteDescanso(new Descanso()
                     {
-                        IdGrupoMuscular = Id,
-                        Nombre = textBox1.Text
+                        IdDescanso = Id,
+                        TiempoDescanso = textBox1.Text.Trim()
+
                     });
+
                     FillDataGridView();
                     textBox1.Text = "";
                 }
                 else
                 {
-                    MessageBox.Show("Debes seleccionar una fila de la tabla");
+                    MessageBox.Show("Debes seleccionar una fila");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                MessageBox.Show("No se pudo eliminar el musculo");
+                MessageBox.Show("No se pudo eliminar el descanso");
 
             }
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GetDatos();
+        }
+        private void GetDatos()
+        {
+            try
+            {
+                Id = int.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString());
+                textBox1.Text = dataGridView1.SelectedRows[0].Cells[1].Value.ToString();
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            GetDatos();
         }
     }
 }

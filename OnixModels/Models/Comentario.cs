@@ -6,7 +6,7 @@ namespace OnixModels.Models
 {
     public class Comentario
     {
-        public int idComentario { get; set; }
+        public int IdComentario { get; set; }
         public string TipoComentario { get; set; }
     }
 }
